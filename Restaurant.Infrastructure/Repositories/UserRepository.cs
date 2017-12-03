@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Restaurant.Core.Entities;
+using Restaurant.Core.Interfaces;
 
 namespace Restaurant.Infrastructure.Repositories
 {

@@ -44,10 +44,46 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -89,19 +125,227 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="assets\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="assets\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="assets\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\bootstrap\js\npm.js" />
+    <Content Include="assets\flexslider\flexslider.css" />
+    <Content Include="assets\flexslider\fonts\flexslider-icon.svg" />
+    <Content Include="assets\flexslider\images\bg_play_pause.png" />
+    <Content Include="assets\flexslider\jquery.flexslider-min.js" />
+    <Content Include="assets\flexslider\jquery.flexslider.js" />
+    <Content Include="assets\font-awesome\font-awesome\css\font-awesome.css" />
+    <Content Include="assets\font-awesome\font-awesome\css\font-awesome.min.css" />
+    <Content Include="assets\font-awesome\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\font-awesome\index.html" />
+    <Content Include="assets\ico\apple-touch-icon-144-precomposed.png" />
+    <Content Include="assets\ico\favicon.ico" />
+    <Content Include="assets\images\avatars\1.png" />
+    <Content Include="assets\images\avatars\comment1.png" />
+    <Content Include="assets\images\avatars\comment2.png" />
+    <Content Include="assets\images\backgrounds\bg1.png" />
+    <Content Include="assets\images\backgrounds\bg1_alt.png" />
+    <Content Include="assets\images\backgrounds\bg2.png" />
+    <Content Include="assets\images\backgrounds\bg3.png" />
+    <Content Include="assets\images\backgrounds\bg_footer.png" />
+    <Content Include="assets\images\backgrounds\bg_footer1.png" />
+    <Content Include="assets\images\backgrounds\bg_socials.jpg" />
+    <Content Include="assets\images\backgrounds\bg_testimonials.jpg" />
+    <Content Include="assets\images\backgrounds\bg_video.jpg" />
+    <Content Include="assets\images\backgrounds\bg_video_chinese.jpg" />
+    <Content Include="assets\images\backgrounds\pattern_dot.png" />
+    <Content Include="assets\images\banners\1.jpg" />
+    <Content Include="assets\images\banners\2.jpg" />
+    <Content Include="assets\images\banners_chinese\1.jpg" />
+    <Content Include="assets\images\banners_chinese\2.jpg" />
+    <Content Include="assets\images\blog\post1.jpg" />
+    <Content Include="assets\images\blog\post2.jpg" />
+    <Content Include="assets\images\blog\post3.jpg" />
+    <Content Include="assets\images\blog\post4.jpg" />
+    <Content Include="assets\images\blog\post5.jpg" />
+    <Content Include="assets\images\blog\post6.jpg" />
+    <Content Include="assets\images\blog\single.jpg" />
+    <Content Include="assets\images\blog\thumbnail1.png" />
+    <Content Include="assets\images\blog\thumbnail2.png" />
+    <Content Include="assets\images\blog\thumbnail3.png" />
+    <Content Include="assets\images\blog_chinese\post1.jpg" />
+    <Content Include="assets\images\blog_chinese\post2.jpg" />
+    <Content Include="assets\images\blog_chinese\post3.jpg" />
+    <Content Include="assets\images\delivery.png" />
+    <Content Include="assets\images\gallery2\gallery10.jpg" />
+    <Content Include="assets\images\gallery2\gallery11.jpg" />
+    <Content Include="assets\images\gallery2\gallery12.jpg" />
+    <Content Include="assets\images\gallery2\gallery13.jpg" />
+    <Content Include="assets\images\gallery2\gallery14.jpg" />
+    <Content Include="assets\images\gallery2\gallery3.jpg" />
+    <Content Include="assets\images\gallery2\gallery4.jpg" />
+    <Content Include="assets\images\gallery2\gallery5.jpg" />
+    <Content Include="assets\images\gallery2\gallery6.jpg" />
+    <Content Include="assets\images\gallery2\gallery7.jpg" />
+    <Content Include="assets\images\gallery2\gallery8.jpg" />
+    <Content Include="assets\images\gallery2\gallery9.jpg" />
+    <Content Include="assets\images\gallery3\1.jpg" />
+    <Content Include="assets\images\gallery3\2.jpg" />
+    <Content Include="assets\images\gallery3\3.jpg" />
+    <Content Include="assets\images\gallery3\4.jpg" />
+    <Content Include="assets\images\gallery3\5.jpg" />
+    <Content Include="assets\images\gallery3\6.jpg" />
+    <Content Include="assets\images\gallery3\7.jpg" />
+    <Content Include="assets\images\gallery3\8.jpg" />
+    <Content Include="assets\images\gallery3\9.jpg" />
+    <Content Include="assets\images\gallery\gallery1.jpg" />
+    <Content Include="assets\images\gallery\gallery2.jpg" />
+    <Content Include="assets\images\gallery\gallery3.jpg" />
+    <Content Include="assets\images\gallery\gallery4.jpg" />
+    <Content Include="assets\images\gallery\gallery5.jpg" />
+    <Content Include="assets\images\gallery\gallery6.jpg" />
+    <Content Include="assets\images\gallery\gallery7.jpg" />
+    <Content Include="assets\images\gallery\gallery8.jpg" />
+    <Content Include="assets\images\gallery_chinese\1.jpg" />
+    <Content Include="assets\images\gallery_chinese\2.jpg" />
+    <Content Include="assets\images\gallery_chinese\3.jpg" />
+    <Content Include="assets\images\gallery_chinese\4.jpg" />
+    <Content Include="assets\images\gallery_chinese\5.jpg" />
+    <Content Include="assets\images\gallery_chinese\6.jpg" />
+    <Content Include="assets\images\gallery_chinese\7.jpg" />
+    <Content Include="assets\images\gallery_chinese\8.jpg" />
+    <Content Include="assets\images\headers\about.png" />
+    <Content Include="assets\images\headers\blog.png" />
+    <Content Include="assets\images\headers\contact.png" />
+    <Content Include="assets\images\headers\delivery.png" />
+    <Content Include="assets\images\headers\gallery.png" />
+    <Content Include="assets\images\headers\menu.png" />
+    <Content Include="assets\images\headers\specials.png" />
+    <Content Include="assets\images\logo%402x.png" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\map_marker.png" />
+    <Content Include="assets\images\menu\menu1.jpg" />
+    <Content Include="assets\images\menu\menu2.jpg" />
+    <Content Include="assets\images\menu\menu3.jpg" />
+    <Content Include="assets\images\menu\menu4.jpg" />
+    <Content Include="assets\images\menu\menu5.jpg" />
+    <Content Include="assets\images\menu\menu6.jpg" />
+    <Content Include="assets\images\menu\menu7.jpg" />
+    <Content Include="assets\images\menu\menu8.jpg" />
+    <Content Include="assets\images\mobile.png" />
+    <Content Include="assets\images\mobile_button1.png" />
+    <Content Include="assets\images\mobile_button2.png" />
+    <Content Include="assets\images\products\1.png" />
+    <Content Include="assets\images\products\1_small.png" />
+    <Content Include="assets\images\products\2.png" />
+    <Content Include="assets\images\products\2_small.png" />
+    <Content Include="assets\images\products\3.png" />
+    <Content Include="assets\images\products\3_small.png" />
+    <Content Include="assets\images\products\detail1.jpg" />
+    <Content Include="assets\images\products\detail2.jpg" />
+    <Content Include="assets\images\products\detail3.jpg" />
+    <Content Include="assets\images\products_chinese\1.jpg" />
+    <Content Include="assets\images\products_chinese\2.jpg" />
+    <Content Include="assets\images\section_delimiter%402x.png" />
+    <Content Include="assets\images\section_delimiter.png" />
+    <Content Include="assets\images\slider2\1_big.jpg" />
+    <Content Include="assets\images\slider2\1_small.jpg" />
+    <Content Include="assets\images\slider2\2_small.jpg" />
+    <Content Include="assets\images\slider2\3_small.jpg" />
+    <Content Include="assets\images\slider2\4_small.jpg" />
+    <Content Include="assets\images\slider2\5_small.jpg" />
+    <Content Include="assets\images\slider2_chinese\1_big.jpg" />
+    <Content Include="assets\images\slider2_chinese\1_small.jpg" />
+    <Content Include="assets\images\slider2_chinese\2_small.jpg" />
+    <Content Include="assets\images\slider2_chinese\3_small.jpg" />
+    <Content Include="assets\images\slider2_chinese\4_small.jpg" />
+    <Content Include="assets\images\slider2_chinese\5_small.jpg" />
+    <Content Include="assets\images\slider\1.jpg" />
+    <Content Include="assets\images\slider\2.jpg" />
+    <Content Include="assets\images\slider\3.jpg" />
+    <Content Include="assets\images\slider_chinese\1.jpg" />
+    <Content Include="assets\images\store\1.jpg" />
+    <Content Include="assets\images\store\2.jpg" />
+    <Content Include="assets\images\store\3.jpg" />
+    <Content Include="assets\images\store\4.jpg" />
+    <Content Include="assets\images\store_chinese\1.jpg" />
+    <Content Include="assets\images\store_chinese\2.jpg" />
+    <Content Include="assets\images\store_chinese\3.jpg" />
+    <Content Include="assets\images\workers\1.jpg" />
+    <Content Include="assets\images\workers\2.jpg" />
+    <Content Include="assets\images\workers\3.jpg" />
+    <Content Include="assets\images\workers\4.jpg" />
+    <Content Include="assets\js\custom.js" />
+    <Content Include="assets\js\isotope.pkgd.min.js" />
+    <Content Include="assets\js\jquery-1.11.3.min.js" />
+    <Content Include="assets\js\jquery.inview.min.js" />
+    <Content Include="assets\js\jquery.nav.min.js" />
+    <Content Include="assets\js\jquery.scrollTo.min.js" />
+    <Content Include="assets\js\jquery.stellar.min.js" />
+    <Content Include="assets\js\modernizr-custom.min.js" />
+    <Content Include="assets\lightbox\css\lightbox.css" />
+    <Content Include="assets\lightbox\img\close.png" />
+    <Content Include="assets\lightbox\img\loading.gif" />
+    <Content Include="assets\lightbox\img\next.png" />
+    <Content Include="assets\lightbox\img\prev.png" />
+    <Content Include="assets\lightbox\js\lightbox.min.js" />
+    <Content Include="assets\owl-carousel2\assets\owl.carousel.css" />
+    <Content Include="assets\owl-carousel2\owl.carousel.js" />
+    <Content Include="assets\owl-carousel2\owl.carousel.min.js" />
+    <Content Include="assets\php\include\class.emailSender.php" />
+    <Content Include="assets\php\include\mailchimp-api\src\Drewm\MailChimp.php" />
+    <Content Include="assets\php\save_rss.php" />
+    <Content Include="assets\php\send_email.php" />
+    <Content Include="assets\retina\mit-license.txt" />
+    <Content Include="assets\retina\retina.js" />
+    <Content Include="assets\retina\retina.min.js" />
+    <Content Include="assets\styles\animate.css" />
+    <Content Include="assets\styles\animate.min.css" />
+    <Content Include="assets\styles\main.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\index.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\DeliveryViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="assets\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="assets\bootstrap\css\bootstrap.css.map" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\flexslider\fonts\flexslider-icon.eot" />
+    <Content Include="assets\flexslider\fonts\flexslider-icon.ttf" />
+    <Content Include="assets\flexslider\fonts\flexslider-icon.woff" />
+    <Content Include="assets\flexslider\LICENSE.md" />
+    <Content Include="assets\flexslider\README.mdown" />
+    <Content Include="assets\font-awesome\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\font-awesome\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\font-awesome\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\font-awesome\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\font-awesome\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="assets\lightbox\README.markdown" />
+    <Content Include="assets\php\include\mailchimp-api\composer.json" />
+    <Content Include="assets\php\include\mailchimp-api\LICENSE" />
+    <Content Include="assets\php\include\mailchimp-api\README.md" />
+    <Content Include="assets\styles\main.less" />
     <None Include="packages.config" />
+    <Content Include="Views\Shared\_LayoutMainPage.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -111,8 +355,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Restaurant.Core\Restaurant.Core.csproj">
