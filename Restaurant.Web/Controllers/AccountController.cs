@@ -99,8 +99,12 @@ namespace Restaurant.Web.Controllers
 		    //   }
 		    var newUser = new UserIdentity()
 		    {
+				DisplayName = model.FullName,
 			    Email = model.Email,
 			    UserName = model.Username,
+				FirstName = model.FullName,
+				LastName = model.FullName,
+				
 		    };
 
 		    await _userRepository.CreateAsync(newUser, model.Password);

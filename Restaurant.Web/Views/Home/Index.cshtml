@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en-gb" class="isie ie8 oldie no-js"> <![endif]-->
 <!--[if IE 9 ]>    <html lang="en-gb" class="isie ie9 no-js"> <![endif]-->
@@ -67,9 +69,17 @@
                         <div class="col-xs-6">
                             <em>Call now: 0 800 - <span class="text-uppercase">Pizza delivery</span></em>
                         </div>
-                        <div class="col-xs-6 text-right">
-                            Welcome Guest, <a href="@Url.Action("Index","Account")" class="text-uppercase">Sign in</a> | <a href="@Url.Action("Index","Account")" class="text-uppercase">Create new account</a>
-                        </div>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <div class="col-xs-6 text-right">
+                                Welcome @User.Identity.GetUserName() , <a href="@Url.Action("Logout","Account")" class="text-uppercase">Logout</a> 
+                            </div>}
+                        else
+                        {
+                            <div class="col-xs-6 text-right">
+                                Welcome Guest, <a href="@Url.Action("Index","Account")" class="text-uppercase">Sign in</a> | <a href="@Url.Action("Index","Account")" class="text-uppercase">Create new account</a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div><!-- .page-top -->
