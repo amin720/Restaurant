@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Restaurant.Core.Entities;
+using Restaurant.Core.Interfaces;
+using Restaurant.Infrastructure.Repositories;
+using Restaurant.Web.Areas.Admin.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Restaurant.Core.Entities;
-using Restaurant.Core.Interfaces;
-using Restaurant.Infrastructure.Repositories;
-using Restaurant.Web.Areas.Admin.ViewModels;
 
 namespace Restaurant.Web.Areas.Admin.Controllers
 {
@@ -289,7 +289,7 @@ namespace Restaurant.Web.Areas.Admin.Controllers
 					{
 						db.CartItems.Remove(cart.First());
 					}
-
+					
 					await _productRepository.DeleteAsync(productId);
 
 					return RedirectToAction("Index");

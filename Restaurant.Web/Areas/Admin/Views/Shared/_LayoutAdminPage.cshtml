@@ -50,8 +50,6 @@
 
     <link href="~/Areas/Admin/Content/css/jquery-ui.min.css" rel="stylesheet" />
 
-    @Styles.Render("~/Content/dropzonescss")
-
 </head>
 <body>
     <!-- Page Wrapper -->
@@ -98,23 +96,6 @@
                                 <i class="fa fa-ellipsis-h"></i>
                             </li>
                             <li>
-                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-more_items sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">نوشته ها</span></a>
-                                <ul>
-                                    <li>
-                                        <a href="@Url.Action("Create","Post")" class=" active">اضافه کردن</a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Index","Post")">لیست نوشته ها</a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Index","PostCategory")">دسته بندی</a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Index","Tag")">بر چسپ</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
                                 <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-shopping_cart sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">محصولات</span></a>
                                 <ul>
                                     <li>
@@ -135,17 +116,6 @@
                                 <i class="fa fa-ellipsis-h"></i>
                             </li>
                             <li>
-                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">مشتریان</span></a>
-                                <ul>
-                                    <li>
-                                        <a href="Contacts.html">لیست مشتریان</a>
-                                    </li>
-                                    <li>
-                                        <a href="Factors.html">فاکتور ها</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
                                 <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">کاربران</span></a>
                                 <ul>
                                     <li>
@@ -158,15 +128,6 @@
                             </li>
                             <li class="sidebar-separator">
                                 <i class="fa fa-ellipsis-h"></i>
-                            </li>
-                            <li>
-                                <a href="Ticketing.html"><i class="gi gi-inbox sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">تیکتینگ</span></a>
-                            </li>
-                            <li class="sidebar-separator">
-                                <i class="fa fa-ellipsis-h"></i>
-                            </li>
-                            <li>
-                                <a href="Media.html"><i class="gi gi-picture sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">رسانه ها</span></a>
                             </li>
                         </ul>
                         <!-- END Sidebar Navigation -->
@@ -368,8 +329,6 @@
     <script src="~/Areas/Admin/Scripts/js/admin.js"></script>
 
     <script src="~/Areas/Admin/Scripts/js/jquery-ui.min.js"></script>
-    @Scripts.Render("~/bundles/dropzonescripts")
-
     @RenderSection("Blogging", required: false)
     @RenderSection("Tag", required: false)
     @RenderSection("Category", required: false)

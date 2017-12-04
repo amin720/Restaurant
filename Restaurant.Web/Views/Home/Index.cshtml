@@ -67,7 +67,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-6">
-                            <em>Call now: 0 800 - <span class="text-uppercase">Pizza delivery</span></em>
+                            <a href="@Url.Action("","Admin")" class="text-uppercase">Login User</a> 
+                            @*<em>Call now: 0 800 - <span class="text-uppercase">Pizza delivery</span></em>*@
                         </div>
                         @if (Request.IsAuthenticated)
                         {
@@ -310,7 +311,8 @@
 
     <section class="heavy-borders bg-black-cover1 section-video bg-pattern2">
         <div id="video-main-play" class="icon-video onscroll-animate"></div>
-        <iframe id="video-main" src="http://www.youtube.com/embed/tDvBwPzJ7dY?enablejsapi=1&amp;html5=1" allowfullscreen></iframe>
+        @*<iframe id="video-main" src="http://www.youtube.com/embed/tDvBwPzJ7dY?enablejsapi=1&amp;html5=1" allowfullscreen></iframe>*@
+        <iframe id="video-main" src="#" allowfullscreen></iframe>
     </section>
 
     <section id="section-about">
@@ -325,7 +327,8 @@
                 <div class="col-md-6 onscroll-animate" data-animation="fadeInRight">
                     <div class="margin-20"></div>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/rEk0AdJx9gw"></iframe>
+                        @*<iframe class="embed-responsive-item" src="http://www.youtube.com/embed/rEk0AdJx9gw"></iframe>*@
+                        <iframe class="embed-responsive-item" src="#"></iframe>
                     </div>
                 </div>
             </div><!-- .row -->
@@ -519,7 +522,12 @@
                                     <span class="text-uppercase">Ingredients:</span><br>
                                     <em>Pepperoni, Cascioppo Bros. Italian sausage, Ostrom's mushrooms, olives, green peppers, onions and mozzarella over our seasoned tomato sauce.</em>
                                     <div class="margin-30"></div>
-                                    <a class="button-yellow with-right-arrow form-submit-trigger">Order now</a>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <a class="button-yellow with-right-arrow form-submit-trigger">Order now</a>}
+                                else
+                                {
+                                    <a href="@Url.Action("Index","Account")" class="button-yellow with-right-arrow form-submit-trigger">Order now</a>}
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-4">
@@ -1022,7 +1030,12 @@
                     </div>
                 </div>
                 <div class="margin-30"></div>
-                <a class="button-yellow button-long with-right-arrow form-submit-trigger onscroll-animate" data-animation="flipInY">MAKE YOUR ORDER</a>
+                @if (Request.IsAuthenticated)
+                {
+                    <a class="button-yellow button-long with-right-arrow form-submit-trigger onscroll-animate" data-animation="flipInY">MAKE YOUR ORDER</a>}
+                else
+                {
+                    <a href="@Url.Action("Index","Account")" class="button-yellow button-long with-right-arrow form-submit-trigger onscroll-animate" data-animation="flipInY">MAKE YOUR ORDER</a>}
             </form>
             <div class="section-delimiter"></div>
             <form class="text-center">
@@ -1036,10 +1049,10 @@
                         <input type="password" placeholder="Password">
                     </div>
                 </div>
-                <input class="button-yellow button-long onscroll-animate" data-animation="flipInY" type="submit" value="Sign in">
-                <p class="text-center">
+                <a href="@Url.Action("Index","Account")" class="button-yellow button-long onscroll-animate" data-animation="flipInY" >Sign in</a>
+                @*<p class="text-center">
                     <a href="#"><em>Forgot your Password?</em></a>
-                </p>
+                </p>*@
             </form>
             <div class="margin-20"></div>
 
@@ -1426,7 +1439,7 @@
         </div><!-- .site-info -->
     </footer>
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    @*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>*@
     <script type="text/javascript" src="~/assets/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="~/assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/assets/owl-carousel2/owl.carousel.min.js"></script>

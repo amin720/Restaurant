@@ -68,7 +68,7 @@ namespace Restaurant.Web.Areas.Admin.Controllers
 		[AllowAnonymous]
 		public async Task<ActionResult> Login()
 		{
-			return View();
+			return View(viewName: "Login");
 		}
 
 		// product: Admin/Admin/Login
@@ -86,6 +86,7 @@ namespace Restaurant.Web.Areas.Admin.Controllers
 				{
 					//ModelState.AddModelError(string.Empty, "The user with supplied credentials does not exist.");
 					ModelState.AddModelError(string.Empty, "کاربر با مدارک ارائه شده موجود نیست.");
+					return View(viewName: "Login");
 				}
 
 				var authManager = HttpContext.GetOwinContext().Authentication;
