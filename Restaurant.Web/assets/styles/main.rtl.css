@@ -1,0 +1,38 @@
+﻿@font-face {
+    font-family: 'BHoma';
+    src: url('../font/BHoma.eot?#') format('eot'), /* IE6–8 */
+    url('../font/BHoma.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../font/BHoma.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+body, h1, h2, h3, h4, h5, h6, p, .site-name, .site-name-info {
+    font-family: BHoma, Arial, Helvetica, sans-serif;
+}
+
+#main-navigation ul {
+    direction: rtl;
+    float: right;
+}
+#main-navigation > ul > li::after {
+    position: absolute;
+    width: 1px;
+    height: 15px;
+    top: 50%;
+    left: -2px;
+    right: auto;
+    margin-top: -7px;
+    background-color: #c1c6cd;
+    content: '';
+}
+.blmd-wrapp .blmd-continer form#login-form > h1 {
+    text-align: center;
+    border-right: 5px solid #26a69a;
+    border-left: 0;
+}
+.blmd-form .blmd-label {
+    right: 0;
+    left: auto;
+}
+.blmd-wrapp .blmd-header-wrapp .blmd-switches > button {
+    left: -30px;
+    right: auto;
+}

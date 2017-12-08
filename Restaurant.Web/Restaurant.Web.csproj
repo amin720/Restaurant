@@ -1,4 +1,5 @@
 ﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -24,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -132,6 +134,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\images\products\44_xsz.jpg" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Areas\Admin\Content\css\bootstrap.min.css" />
     <Content Include="Areas\Admin\Content\css\bootstrap.rtl.css" />
@@ -649,6 +652,21 @@
     <Content Include="assets\font-awesome\index.html" />
     <Content Include="assets\ico\apple-touch-icon-144-precomposed.png" />
     <Content Include="assets\ico\favicon.ico" />
+    <Content Include="assets\images\backgrounds\1920.1280.jpg" />
+    <Content Include="assets\images\backgrounds\1920.360.jpg" />
+    <Content Include="assets\images\banners\12.jpg" />
+    <Content Include="assets\images\banners\21.jpg" />
+    <Content Include="assets\images\gallery\photo_2017-12-08_23-12-06.jpg" />
+    <Content Include="assets\images\gallery\photo_2017-12-08_23-12-12.jpg" />
+    <Content Include="assets\images\gallery\photo_2017-12-08_23-12-15.jpg" />
+    <Content Include="assets\images\gallery\photo_2017-12-08_23-12-17.jpg" />
+    <Content Include="assets\images\gallery\photo_2017-12-08_23-12-19.jpg" />
+    <Content Include="assets\images\gallery\photo_2017-12-08_23-12-23.jpg" />
+    <Content Include="assets\images\gallery\photo_2017-12-08_23-12-30.jpg" />
+    <Content Include="assets\images\gallery\photo_2017-12-08_23-12-33.jpg" />
+    <Content Include="assets\images\gallery\photo_2017-12-08_23-12-35.jpg" />
+    <Content Include="assets\images\gallery\photo_2017-12-08_23-12-37.jpg" />
+    <Content Include="assets\images\slider\11.jpg" />
     <Content Include="assets\images\avatars\1.png" />
     <Content Include="assets\images\avatars\comment1.png" />
     <Content Include="assets\images\avatars\comment2.png" />
@@ -766,12 +784,17 @@
     <Content Include="assets\images\slider2_chinese\5_small.jpg" />
     <Content Include="assets\images\slider\1.jpg" />
     <Content Include="assets\images\slider\2.jpg" />
+    <Content Include="assets\images\slider\22.jpg" />
     <Content Include="assets\images\slider\3.jpg" />
+    <Content Include="assets\images\slider\33.jpg" />
     <Content Include="assets\images\slider_chinese\1.jpg" />
     <Content Include="assets\images\store\1.jpg" />
     <Content Include="assets\images\store\2.jpg" />
     <Content Include="assets\images\store\3.jpg" />
     <Content Include="assets\images\store\4.jpg" />
+    <Content Include="assets\images\store\r.1.jpg" />
+    <Content Include="assets\images\store\r.2.jpg" />
+    <Content Include="assets\images\store\r.3.jpg" />
     <Content Include="assets\images\store_chinese\1.jpg" />
     <Content Include="assets\images\store_chinese\2.jpg" />
     <Content Include="assets\images\store_chinese\3.jpg" />
@@ -950,11 +973,14 @@
     <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="assets\styles\main.rtl.css" />
+    <Content Include="assets\font\BHoma.eot" />
+    <Content Include="assets\font\BHoma.ttf" />
+    <Content Include="assets\font\BHoma.woff" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutMainPage.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\Account\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -963,7 +989,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Error\" />
@@ -978,11 +1003,15 @@
       <Name>Restaurant.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>

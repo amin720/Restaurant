@@ -47,7 +47,8 @@
         <div class="col-lg-4" dir="rtl">
             <a href="@Url.Action("Edit","Product",new{ productId = product.Id})" class="widget animation-fadeInQuick">
                 <div class="widget-image widget-image-xs">
-                    <img src="../../Content/img/placeholders/photos/photo1.jpg" alt="image">
+                    
+                    <img src="@Url.Content(product.ImageUrl)" alt="@product.Name">
                     <div class="widget-image-content">
                         @if (product.FromDateDiscount != null )
                         {
@@ -66,7 +67,7 @@
                             <h2><span class="text-muted">تومان</span> <strong>@product.Price</strong></h2>
                         </div>
                         <div class="col-xs-8">
-                            <div class="text-muted"><em>SKU:</em> @product.SKU </div>
+                            <div class="text-muted"><em>کد محصول:</em> @product.SKU </div>
                             <div class="text-dark push-bit">@product.Count مورد موجود است</div>
                             @*@Html.ActionLink("Delete", "Delete", new { id = product.Id }, new { data_action = "delete", data_value = product.Name })*@
                             @*<div class="text-warning" dir="ltr">

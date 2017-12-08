@@ -19,6 +19,7 @@ namespace Restaurant.Web.Areas.Admin.ViewModels
 		public DateTime? ToDateDiscount { get; set; }
 		public int Count { get; set; }
 		public string AuthorId { get; set; }
+		public string ImageUrl { get; set; }
 		public IEnumerable<Category> Categories { get; set; }
 	}
 }

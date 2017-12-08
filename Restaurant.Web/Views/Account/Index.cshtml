@@ -9,6 +9,7 @@
     @*<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>*@
     <link href="~/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/assets/styles/main.rtl.css" />
 
 
 </head>
@@ -35,7 +36,7 @@
                     {
                         @Html.AntiForgeryToken()
                         
-                        <h1>Login Page</h1>
+                        <h1>ورود</h1>
                         <div class="col-md-12">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
@@ -43,19 +44,19 @@
                             <div class="input-group blmd-form">
                                 <div class="blmd-line">
                                     <input type="text" name="Username" autocomplete="off" id="username" class="form-control">
-                                    <label class="blmd-label">Username</label>
+                                    <label class="blmd-label">ورود کاربران</label>
                                 </div>
                             </div>
                             <div class="input-group blmd-form">
                                 <div class="blmd-line">
                                     <input type="password" name="Password" autocomplete="off" id="password" class="form-control">
-                                    <label class="blmd-label">Password</label>
+                                    <label class="blmd-label">رمز عبور</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 text-center">
                             @*<button type="button" class="btn btn-blmd ripple-effect btn-success btn-lg btn-block">Login</button>*@
-                            <input type="submit" class="btn btn-blmd ripple-effect btn-warning btn-lg btn-block" value="Login"/>
+                            <input type="submit" class="btn btn-blmd ripple-effect btn-warning btn-lg btn-block" value="ورود"/>
                         </div>
                         <br />}
                     <!-- Login form container -->
@@ -63,7 +64,7 @@
                     {
                         @Html.AntiForgeryToken()
                         
-                        <h1>Register Page</h1>
+                        <h1>ثبت نام</h1>
 
                         <div class="col-md-12">
                             
@@ -78,43 +79,43 @@
                             <div class="input-group blmd-form">
                                 <div class="blmd-line">
                                     <input type="text" name="Username" autocomplete="off" id="username" class="form-control">
-                                    <label class="blmd-label">Username</label>
+                                    <label class="blmd-label">نام کاربری</label>
                                 </div>
                             </div>
                             <div class="input-group blmd-form">
                                 <div class="blmd-line">
                                     <input type="email" name="Email" autocomplete="off" id="username" class="form-control">
-                                    <label class="blmd-label">Email</label>
+                                    <label class="blmd-label">ایمیل</label>
                                 </div>
                             </div>
                             <div class="input-group blmd-form">
                                 <div class="blmd-line">
                                     <input type="password" name="Password" autocomplete="off" id="password" class="form-control">
-                                    <label class="blmd-label">Password</label>
+                                    <label class="blmd-label">رمز عبور</label>
                                 </div>
                             </div>
                             <div class="input-group blmd-form">
                                 <div class="blmd-line">
                                     <input type="password" name="ConfrimedPassword" autocomplete="off" id="password" class="form-control">
-                                    <label class="blmd-label">Repeat Password</label>
+                                    <label class="blmd-label">تکرار رمز عبور</label>
                                 </div>
                             </div>
                             <div class="input-group blmd-form">
                                 <div class="blmd-line">
                                     <input type="text" name="FullName" autocomplete="off" id="FullName" class="form-control">
-                                    <label class="blmd-label">Full Name</label>
+                                    <label class="blmd-label">نام و نام خانوادگی</label>
                                 </div>
                             </div>
                             <div class="input-group blmd-form">
                                 <div class="blmd-line">
                                     <input type="text" name="Mobile" autocomplete="off" id="Mobile" class="form-control">
-                                    <label class="blmd-label">Mobile</label>
+                                    <label class="blmd-label">موبایل</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 text-center">
                             @*<button type="button" class="btn btn-blmd ripple-effect btn-warning btn-lg btn-block">Register</button>*@
-                            <input type="submit" class="btn btn-blmd ripple-effect btn-warning btn-lg btn-block" value="Register"/>
+                            <input type="submit" class="btn btn-blmd ripple-effect btn-warning btn-lg btn-block" value="ثبت نام"/>
                         </div>
                         <br />
 

@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Restaurant.Web.Areas.Admin.Controllers
@@ -70,7 +72,7 @@ namespace Restaurant.Web.Areas.Admin.Controllers
 		[HttpPost]
 		[Route("Create")]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Create(ProductViewModel model)
+		public async Task<ActionResult> Create(ProductViewModel model, HttpPostedFileBase file)
 		{
 			try
 			{
@@ -105,7 +107,7 @@ namespace Restaurant.Web.Areas.Admin.Controllers
 
 				product.Name = model.Name;
 				product.Price = model.Price;
-				product.ImageUrl = null;
+				product.ImageUrl = file.ToString();
 				product.SKU = model.SKU;
 				product.Count = model.Count;
 				product.Discount = model.Discount;
@@ -115,6 +117,25 @@ namespace Restaurant.Web.Areas.Admin.Controllers
 				product.AuthorId = user.Id;
 				product.Published = DateTime.Now;
 				product.CategoryId = category.Id;
+
+				var allowedExtensions = new[] {
+				 ".Jpg", ".png", ".jpg", "jpeg"
+				 };
+
+				var fileName = Path.GetFileName(file.FileName);
+				var ext = Path.GetExtension(file.FileName); //getting the extension(ex-.jpg)
+				 if (allowedExtensions.Contains(ext)) //check what type of extension
+				 {
+					string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extensi
+					string myfile = name + "_" + product.Name + ext; //appending the name with id
+					// store the file inside ~/project folder(Img)E:\Project-Work\Zahra.Project\Restaurant\Restaurant.Web\assets\images\products\1.png
+					var path = Path.Combine(Server.MapPath("~/assets/images/products"), myfile);
+					product.ImageUrl = "~/assets/images/products/" + myfile;
+					file.SaveAs(path);
+				 }
+				else {
+					ModelState.AddModelError(string.Empty, "Please choose only Image file");
+				 }
 
 
 				// TODO: update model in data store
@@ -138,7 +159,6 @@ namespace Restaurant.Web.Areas.Admin.Controllers
 
 			// TODO: to retrieve the model from the data store
 			var product = await _productRepository.GetByIdAsync(productId);
-			var model = new ProductViewModel();
 
 			if (product == null)
 			{
@@ -147,20 +167,25 @@ namespace Restaurant.Web.Areas.Admin.Controllers
 
 			var category = await _categoryRepostitory.GetAsync(product.CategoryId);
 
-			model.Name = product.Name;
-			model.Content = product.Content;
-			model.Discount = product.Discount;
-			model.Price = product.Price;
-			model.CategoryId = product.CategoryId;
-			model.CategoryName = true;
-			model.AuthorId = product.AuthorId;
-			model.FromDateDiscount = product.FromDateDiscount;
-			model.ToDateDiscount = product.ToDateDiscount;
-			model.SKU = product.SKU;
-			model.Count = product.Count;
+			var model = new ProductViewModel
+			{
+				Name = product.Name,
+				Content = product.Content,
+				Discount = product.Discount,
+				Price = product.Price,
+				CategoryId = product.CategoryId,
+				CategoryName = true,
+				AuthorId = product.AuthorId,
+				FromDateDiscount = product.FromDateDiscount,
+				ToDateDiscount = product.ToDateDiscount,
+				SKU = product.SKU,
+				Count = product.Count,
+				ImageUrl = product.ImageUrl,
+				Categories = await _categoryRepostitory.GetAllAsync()
+			};
 
 
-			model.Categories = await _categoryRepostitory.GetAllAsync();
+
 
 			if (User.IsInRole("author"))
 			{
@@ -179,7 +204,7 @@ namespace Restaurant.Web.Areas.Admin.Controllers
 		[HttpPost]
 		[Route("Edit/{postId}")]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Edit(int productId, ProductViewModel model)
+		public async Task<ActionResult> Edit(int productId, ProductViewModel model, HttpPostedFileBase file)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -235,6 +260,25 @@ namespace Restaurant.Web.Areas.Admin.Controllers
 					SKU = model.SKU,
 
 				};
+				var allowedExtensions = new[] {
+					".Jpg", ".png", ".jpg", "jpeg"
+				};
+
+				var fileName = Path.GetFileName(file.FileName);
+				var ext = Path.GetExtension(file.FileName); //getting the extension(ex-.jpg)
+				if (allowedExtensions.Contains(ext)) //check what type of extension
+				{
+					string name = Path.GetFileNameWithoutExtension(fileName); //getting file name without extensi
+					string myfile = name + "_" + product.Name + ext; //appending the name with id
+					// store the file inside ~/project folder(Img)E:\Project-Work\Zahra.Project\Restaurant\Restaurant.Web\assets\images\products\1.png
+					var path = Path.Combine(Server.MapPath("~/assets/images/products"), myfile);
+					product.ImageUrl = "~/assets/images/products/" + myfile;
+					file.SaveAs(path);
+				}
+				else
+				{
+					ModelState.AddModelError(string.Empty, "Please choose only Image file");
+				}
 
 				// TODO: update model in data store
 				await _productRepository.EditAsync(productId, product);

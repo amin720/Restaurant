@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /*
 1. HTML Elements
 2. IDs
@@ -116,7 +116,6 @@ input[type=text],
 textarea {
   width: 100%;
   margin: 15px 0;
-  font-style: italic;
   font-size: 15px;
   color: #343434;
   padding: 8px 17px;
@@ -2265,7 +2264,7 @@ input[type=submit] {
   box-shadow: none;
 }
 .product-pieces input[type=text] {
-  width: 35px;
+  width: 40px;
   margin: 0;
   padding: 5px 10px;
 }
@@ -2462,8 +2461,8 @@ input[type=submit] {
   overflow: hidden;
 }
 .product-preview-small .product-img {
-  float: left;
-  margin-right: 15px;
+  float: right;
+  margin-left: 15px;
 }
 .product-preview-small .product-img i {
   color: #f4cd03;
@@ -2472,11 +2471,12 @@ input[type=submit] {
 }
 .product-preview-small .product-price {
   font-size: 18px;
-  text-align: right;
+  text-align: left;
   padding-top: 20px;
 }
 .product-preview-small .product-title {
-  font-family: 'Playfair Display', serif;
+    float: right;
+    direction: rtl;
   margin-top: 0;
   font-size: 17px;
 }
@@ -2518,13 +2518,13 @@ input[type=submit] {
   color: #000;
 }
 .section-socials {
-  background-image: url('../images/backgrounds/bg_socials.jpg');
-  background-position: center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-repeat: no-repeat;
+    background-image: url('../images/backgrounds/1920.1280.jpg');
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .section-testimonials {
   background-image: url('../images/backgrounds/bg_testimonials.jpg');
@@ -2536,15 +2536,15 @@ input[type=submit] {
   background-repeat: no-repeat;
 }
 .section-video {
-  position: relative;
-  height: 380px;
-  background-image: url('../images/backgrounds/bg_video.jpg');
-  background-position: center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-repeat: no-repeat;
+    position: relative;
+    height: 380px;
+    background-image: url('../images/backgrounds/1920.360.jpg');
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .section-video.bg-alt {
   background-image: url('../images/backgrounds/bg_video_chinese.jpg');
