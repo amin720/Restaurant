@@ -38,11 +38,11 @@ namespace Restaurant.Web.Controllers
 
 		[HttpGet]
 		//[Route("AddToCart/{nameProduct}")]
-		//public async Task<ActionResult> AddToCart(string nameProduct)
-		public async Task<JsonResult> AddToCart(string nameProduct)
+		public async Task<ActionResult> AddToCart(ProductsViewModel model)
+		//public async Task<JsonResult> AddToCart(string nameProduct)
 		{
 			var products = await _productRepository.GetAllAsync();
-			var product = products.SingleOrDefault(p => p.Name == nameProduct);
+			var product = products.SingleOrDefault(p => p.Name == model.Name && p.Category.Name == model.CategoryName);
 			var cart = new ShoppingCart(HttpContext);
 
 
@@ -61,7 +61,7 @@ namespace Restaurant.Web.Controllers
 				await cart.RemoveAsync(11);
 			}
 
-			var model = new ProductsViewModel()
+			model = new ProductsViewModel()
 			{
 				Price = product.Price,
 				Name = product.Name,
@@ -72,8 +72,8 @@ namespace Restaurant.Web.Controllers
 			};
 
 			//return Json(RedirectToAction("Dashboard","Profile"));
-			return Json(model, JsonRequestBehavior.AllowGet);
-			//return RedirectToAction("Dashboard", "Profile");
+			//return Json(model, JsonRequestBehavior.AllowGet);
+			return RedirectToAction("Index", "Home");
 		}
 
 		[HttpGet]

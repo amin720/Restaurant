@@ -38,7 +38,7 @@ address.address-big p {
   margin: 0 0 30px 0;
 }
 body {
-  font-family: 'Vollkorn', serif;
+  /*font-family: 'Vollkorn', serif;*/
   font-size: 15px;
   background: url('../images/backgrounds/bg1.png');
   color: #FFF;
@@ -62,7 +62,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Playfair Display', serif;
+  /*font-family: 'Playfair Display', serif;*/
   margin: 20px 0;
   font-weight: normal;
 }
@@ -1544,7 +1544,7 @@ input[type=submit] {
 .offer h4,
 .offer h5,
 .offer h6 {
-  font-family: 'Vollkorn', serif;
+  /*font-family: 'Vollkorn', serif;*/
   margin: 5px 0;
   color: #FFF;
 }
@@ -1599,7 +1599,7 @@ input[type=submit] {
 .offer-alt h4,
 .offer-alt h5,
 .offer-alt h6 {
-  font-family: 'Vollkorn', serif;
+  /*font-family: 'Vollkorn', serif;*/
   margin: 5px 0;
   color: #FFF;
 }
@@ -2377,7 +2377,7 @@ input[type=submit] {
   font-size: 23px;
 }
 .product-preview .product-title {
-  font-family: 'Playfair Display', serif;
+  /*font-family: 'Playfair Display', serif;*/
   margin-top: 0;
 }
 .product-preview-big {
@@ -2413,12 +2413,12 @@ input[type=submit] {
   padding: 20px 30px;
 }
 .product-preview-big .product-price {
-  font-family: 'Playfair Display', serif;
+  /*font-family: 'Playfair Display', serif;*/
   font-style: normal;
   font-size: 17px;
 }
 .product-preview-big .product-title {
-  font-family: 'Playfair Display', serif;
+  /*font-family: 'Playfair Display', serif;*/
   font-style: normal;
   margin-top: 0;
   margin-bottom: 10px;
@@ -2442,12 +2442,12 @@ input[type=submit] {
   margin-right: 16px;
 }
 .product-preview-medium .product-price {
-  font-family: 'Playfair Display', serif;
+  /*font-family: 'Playfair Display', serif;*/
   font-style: normal;
   font-size: 17px;
 }
 .product-preview-medium .product-title {
-  font-family: 'Playfair Display', serif;
+  /*font-family: 'Playfair Display', serif;*/
   font-style: normal;
   margin-top: 0;
   margin-bottom: 10px;
@@ -2566,7 +2566,7 @@ input[type=submit] {
   margin-top: 60px;
 }
 .site-name {
-  font-family: 'Vollkorn', serif;
+  /*font-family: 'Vollkorn', serif;*/
   font-size: 18px;
   font-weight: bold;
   line-height: 1.2;
@@ -2574,7 +2574,7 @@ input[type=submit] {
   margin: 0;
 }
 .site-name-info {
-  font-family: 'Vollkorn', serif;
+  /*font-family: 'Vollkorn', serif;*/
   font-size: 13px;
   font-style: italic;
   line-height: 1.2;
@@ -2582,7 +2582,7 @@ input[type=submit] {
   margin: 0;
 }
 .social-big {
-  font-family: 'Playfair Display', serif;
+  /*font-family: 'Playfair Display', serif;*/
   display: inline-block;
   text-align: center;
   font-size: 17px;
@@ -2612,7 +2612,7 @@ input[type=submit] {
   transform: scale(1);
 }
 .social-big .social-detail {
-  font-family: 'Vollkorn', serif;
+  /*font-family: 'Vollkorn', serif;*/
   text-transform: none;
   font-style: italic;
   font-size: 15px;
@@ -2698,14 +2698,14 @@ input[type=submit] {
   color: #000;
 }
 .testimonial {
-  font-family: 'Playfair Display', serif;
+  /*font-family: 'Playfair Display', serif;*/
   font-size: 23px;
   text-align: center;
   margin: 40px 0 45px 0;
   color: #FFF;
 }
 .testimonial .testimonial-detail {
-  font-family: 'Vollkorn', serif;
+  /*font-family: 'Vollkorn', serif;*/
   font-size: 17px;
 }
 .testimonial .testimonial-image {
@@ -2734,13 +2734,13 @@ input[type=submit] {
   font-size: 18px;
 }
 .text-high {
-  font-family: 'Playfair Display', serif;
+  /*font-family: 'Playfair Display', serif;*/
   font-size: 25px;
   text-align: center;
   margin: 30px 0;
 }
 .text-normal {
-  font-family: 'Vollkorn', serif;
+  /*font-family: 'Vollkorn', serif;*/
   font-size: 15px;
   text-decoration: none;
   font-weight: normal;

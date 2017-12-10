@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@model Restaurant.Web.ViewModels.ProductsViewModel
 
 <!DOCTYPE html>
 <!--[if IE 7 ]>    <html lang="en-gb" class="isie ie7 oldie no-js"> <![endif]-->
@@ -6,7 +7,7 @@
 <!--[if IE 9 ]>    <html lang="en-gb" class="isie ie9 no-js"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html lang="fa" xml:lang="fa" class="no-js">
- <!--<![endif]-->
+<!--<![endif]-->
 
 <head>
     <meta charset="utf-8">
@@ -68,20 +69,19 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a href="/admin/admin/login" class="text-uppercase">ورود ادمین</a> 
+                            <a href="/admin/admin/login" class="text-uppercase">ورود ادمین</a>
                             @*<em>Call now: 0 800 - <span class="text-uppercase">Pizza delivery</span></em>*@
                         </div>
                         @if (Request.IsAuthenticated)
                         {
                             <div class="col-xs-6 text-right">
-                                Welcome @User.Identity.GetUserName() , <a href="@Url.Action("Logout","Account")" class="text-uppercase">خروج</a> 
+                                خوش آمدید  @User.Identity.GetUserName() , <a href="@Url.Action("Logout","Account")" class="text-uppercase">خروج</a>
                             </div>}
                         else
                         {
                             <div class="col-xs-6 text-right">
                                 خوش آمدید مهمان, <a href="@Url.Action("Index","Account")" class="text-uppercase">ورود</a> | <a href="@Url.Action("Index","Account")" class="text-uppercase">ایجاد یک حساب کاربری جدید</a>
-                            </div>
-                        }
+                            </div>}
                     </div>
                 </div>
             </div><!-- .page-top -->
@@ -126,7 +126,7 @@
                                         <a href="#section-contact">مخاطب</a>
                                     </li>
                                     <li>
-                                        <div class="menu-item has-small-label cart-trigger"><i class="fa fa-shopping-cart"></i><span class="small-label"><span>2</span></span></div>
+                                        <div class="menu-item has-small-label cart-trigger"><i class="fa fa-shopping-cart"></i><span class="small-label"><span>@Model.CartItems.Count()</span></span></div>
                                     </li>
                                 </ul>
                             </nav>
@@ -261,7 +261,7 @@
                                     </div>
                                 </div>
                                 <h3 class="bottom-line"><a href="#">تیکه پیتزا</a></h3>
-                                
+
                             </div>
                         </div>
                         <div class="col-md-6 responsive-column">
@@ -272,7 +272,7 @@
                                     </div>
                                 </div>
                                 <h3 class="bottom-line"><a href="#">گوجه فرنگی</a></h3>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -287,7 +287,7 @@
                                     </div>
                                 </div>
                                 <h3 class="bottom-line"><a href="#">قارچ</a></h3>
-                                
+
                             </div>
                         </div>
                         <div class="col-md-6 responsive-column">
@@ -298,7 +298,7 @@
                                     </div>
                                 </div>
                                 <h3 class="bottom-line"><a href="#">زیتون</a></h3>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -311,7 +311,7 @@
         <div id="video-main-play" class="icon-video onscroll-animate"></div>
         @*<iframe id="video-main" src="http://www.youtube.com/embed/tDvBwPzJ7dY?enablejsapi=1&amp;html5=1" allowfullscreen></iframe>*@
         <iframe id="video-main" src="https://www.aparat.com/video/video/embed/videohash/rYFs9/vt/frame" allowfullscreen></iframe>
-        
+
     </section>
 
     <section id="section-about">
@@ -473,894 +473,804 @@
     <section id="section-menu">
         <div class="container">
             <h1 class="bottom-line">منو</h1>
-            <p class="text-center"><em>بهترین پیتزا در تمام مزه ها را از ما بخواهید.</em></p>
+            <p class="text-center" dir="rtl"><em>بهترین پیتزا در تمام مزه ها را از ما بخواهید.</em></p>
             <div class="onscroll-animate">
                 <div id="menu-slider">
-                    <div class="product-preview product-detail-trigger active" data-product-detail="#product-1-detail">
-                        <div class="product-preview-inner">
-                            <div class="product-photo">
-                                <div class="product-price">
-                                    <sub>تومان</sub>7.<sup>99</sup>
-                                </div>
-                                <img alt="product" src="~/assets/images/products/1.png">
+                    @foreach (var category in Model.Categories.Where(cat => cat.ParentId == null).ToList())
+                    {
+                        <div class="product-preview product-detail-trigger" data-product-detail="#@category.Id">
+                            <div class="product-preview-inner">
+                                @*<div class="product-photo">
+                                        <img alt="@category.Name" src="~/assets/images/products/1.png">
+                                    </div>*@
+                                <h3 class="product-title">@category.Name</h3>
                             </div>
-                            <h3 class="product-title">Vegetarian</h3>
-                        </div>
-                    </div><!-- .product-preview -->
-                    <div class="product-preview product-detail-trigger" data-product-detail="#product-2-detail">
-                        <div class="product-preview-inner">
-                            <div class="product-photo">
-                                <div class="product-price">
-                                    <sub>تومان</sub>5.<sup>99</sup>
-                                </div>
-                                <img alt="product" src="~/assets/images/products/2.png">
-                            </div>
-                            <h3 class="product-title">Mushroom Lovers</h3>
-                        </div>
-                    </div><!-- .product-preview -->
-                    <div class="product-preview product-detail-trigger" data-product-detail="#product-3-detail">
-                        <div class="product-preview-inner">
-                            <div class="product-photo">
-                                <div class="product-price">
-                                    <sub>تومان</sub>8.<sup>99</sup>
-                                </div>
-                                <img alt="product" src="~/assets/images/products/3.png">
-                            </div>
-                            <h3 class="product-title">Pepperoni Burner</h3>
-                        </div>
-                    </div><!-- .product-preview -->
+                        </div><!-- .product-preview -->}
+
                 </div><!-- #menu-slider -->
             </div><!-- .onscroll-animate -->
 
             <div id="product-details" class="product-details onscroll-animate">
-                <div id="product-1-detail" class="product-detail">
-                    <form>
-                        <input type="hidden" name="product-name" value="product1 name">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-8">
-                                <div class="product-detail-left">
-                                    <h4 class="text-uppercase no-top-margin">Vegetarian</h4>
-                                    <span class="text-uppercase">Ingredients:</span><br>
-                                    <em>Pepperoni, Cascioppo Bros. Italian sausage, Ostrom's mushrooms, olives, green peppers, onions and mozzarella over our seasoned tomato sauce.</em>
-                                    <div class="margin-30"></div>
+                @foreach (var category in Model.Categories.Where(cat => cat.ParentId == null).ToList())
+                {
+                    string imgeUrl = string.Empty;
+                    <div id="@category.Id" class="product-detail">
+                        @using (Html.BeginForm("AddToCart", "ShoppingCart", FormMethod.Get))
+                        {
+                            
+                        
+                            <input type="hidden" name="" value="@category.Name">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-8">
+                                    <div class="product-detail-left">
+                                        <h4 class="text-uppercase no-top-margin">@category.Name</h4>
+                                        <span class="text-uppercase">مشخصات:</span><br>
+                                        <em>
+                                            . سوسیس های ایتالیایی، قارچ، زیتون، فلفل سبز، پیاز و موتزارلا بر سس گوجه فرنگی ما چاشنی.
+                                        </em>
+                                        <div class="margin-30"></div>
+                                        @if (Request.IsAuthenticated)
+                                        {
+                                            <a class="button-yellow with-right-arrow form-submit-trigger">سفارش دهید</a>}
+                                        else
+                                        {
+                                            <a href="@Url.Action("Index", "Account")" class="button-yellow with-right-arrow form-submit-trigger">سفارش دهید</a>
+                                            
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4">
+                                    <div class="product-detail-middle">
+                                        <span class="text-uppercase">انتخاب اندازه:</span>
+                                    @foreach (var product in Model.Products.Where(cat => cat.Category.ParentId == category.Id))
+                                    {
+                                        imgeUrl = product.ImageUrl;
+
+                                        <label class="product-size">
+                                            <input type="radio" name="CategoryName" value="@product.Category.Name">
+                                            <input type="hidden" name="Name" value="@product.Name">
+                                            @if (product.Category.Name == "کوچک")
+                                            {
+                                                <span class="product-size-img">
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 43.988 44.979" style="enable-background: new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
+                                                </span>
+                                            }
+                                            @if (product.Category.Name == "متوسط")
+                                            {
+                                                <span class="product-size-img">
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px" height="36px" viewBox="0 0 43.988 44.979" style="enable-background: new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
+                                                </span>
+                                            } 
+                                            @if (product.Category.Name == "بزرگ")
+                                            {
+                                                <span class="product-size-img">
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="43px" height="43px" viewBox="0 0 43.988 44.979" style="enable-background: new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
+                                                </span>
+                                            }
+                                            
+                                            @product.Category.Name:   @product.Price تومان
+                                        </label><!-- .product-size -->
+                                    }
+                                        
+                                    </div><!-- .product-detail-content -->
+                                </div><!-- .col-lg-3 -->
+                            </div><!-- .row -->
+                        }
+                        <a class="product-detail-img" href="@Url.Content(imgeUrl)" data-lightbox="product-1" style="background-image: url('@Url.Content(imgeUrl)')">
+                            <img alt="product detail" src="@Url.Content(imgeUrl)" height="570" width="312">
+                        </a>
+                    </div><!-- #product-1-detail -->
+                  }
+                    
+                </div><!-- .product-details -->
+                    @*<p class="text-center">
+                            <a href="menu_1.html" class="button-void button-long onscroll-animate" data-animation="flipInY">SEE FULL MENU</a>
+                        </p>*@
+                </div><!-- .container -->
+            </section><!-- #section-menu -->
+
+                    <section class="section-testimonials heavy-borders bg-black-cover2 parallax-background">
+                        <div class="container bg-delivery">
+                            <div class="margin-50"></div>
+                            <div class="row onscroll-animate">
+                                <div class="col-md-9 col-md-offset-3">
+                                    <div id="testimonial-slider">
+                                        <div class="testimonial">
+                                            Good design is making something intelligible and memorable. Great design is making something memorable and meaningful.
+                                            <div class="testimonial-image">
+                                                <img alt="author" src="~/assets/images/avatars/1.png">
+                                            </div>
+                                            <div class="testimonial-detail">
+                                                Dieter Rams | <em>Ceo at doing things</em>
+                                            </div>
+                                        </div><!-- .testimonial -->
+                                        <div class="testimonial">
+                                            Good design is making something intelligible and memorable. Great design is making something memorable and meaningful.
+                                            <div class="testimonial-image">
+                                                <img alt="author" src="~/assets/images/avatars/1.png">
+                                            </div>
+                                            <div class="testimonial-detail">
+                                                Dieter Rams | <em>Ceo at doing things</em>
+                                            </div>
+                                        </div><!-- .testimonial -->
+                                        <div class="testimonial">
+                                            Good design is making something intelligible and memorable. Great design is making something memorable and meaningful.
+                                            <div class="testimonial-image">
+                                                <img alt="author" src="~/assets/images/avatars/1.png">
+                                            </div>
+                                            <div class="testimonial-detail">
+                                                Dieter Rams | <em>Ceo at doing things</em>
+                                            </div>
+                                        </div><!-- .testimonial -->
+                                    </div><!-- #testimonial-slider -->
+                                </div><!-- .col-md-9 -->
+                            </div><!-- .row -->
+                            <div class="margin-100"></div>
+                        </div><!-- .container -->
+                    </section>
+
+                    <section id="section-gallery">
+                        <div class="container">
+                            <h1 class="bottom-line">گالری</h1>
+                            <p class="text-center"><em></em></p>
+                            <div class="text-center onscroll-animate" data-animation="fadeInDown" data-delay="300">
+                                فیلتر:
+                                <ul id="gallery-filter" class="list-filter">
+                                    <li><a class="isotope-filter active" data-filter="*">همه</a></li>
+                                    <li><a class="isotope-filter" data-filter=".filter-pizza">پیتزا</a></li>
+                                    <li><a class="isotope-filter" data-filter=".filter-sandwiches">ساندویچ</a></li>
+                                    <li><a class="isotope-filter" data-filter=".filter-hamburgers">همبرگر</a></li>
+                                </ul>
+                            </div>
+                            <div class="onscroll-animate" data-animation="fadeInUp">
+                                <div id="gallery" class="gallery row">
+                                    <div class="col-md-3 col-sm-6 col-xs-12 grid-sizer"></div><!-- basic size of the grid -->
+                                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item filter-pizza filter-sandwiches filter-wordpress">
+                                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-30.jpg">
+                                        <div class="gallery-item-detail">
+                                            <div class="text-right">
+                                                <a href="~/assets/images/gallery/photo_2017-12-08_23-12-30.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
+                                                <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
+                                            </div>
+                                        </div>
+                                    </div><!-- .gallery-item -->
+                                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item dark-cover filter-sandwiches filter-wordpress">
+                                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-17.jpg">
+                                        <div class="gallery-item-detail">
+                                            <div class="text-center">
+                                                <p>
+                                                    <a href="~/assets/images/gallery/photo_2017-12-08_23-12-17.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
+                                                    <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
+                                                </p>
+                                                <h4 class="gallery-item-heading">داغ داغ</h4>
+                                                فلفل هندی ، سس سالسا
+                                            </div>
+                                        </div>
+                                    </div><!-- .gallery-item -->
+                                    <div class="col-md-6 col-sm-6 col-xs-12 gallery-item filter-pizza filter-photoshop">
+                                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-33.jpg">
+                                        <div class="gallery-item-detail">
+                                            <div class="row">
+                                                <div class="col-sm-7 hidden-xs">
+                                                    <h4 class="gallery-item-heading">داغ داغ</h4>
+                                                    فلفل هندی ، سس سالسا
+                                                </div>
+                                                <div class="col-sm-5 text-right">
+                                                    <a href="~/assets/images/gallery/photo_2017-12-08_23-12-33.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
+                                                    <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- .gallery-item -->
+                                    <div class="col-md-6 col-sm-6 col-xs-12 gallery-item filter-hamburgers filter-photoshop">
+                                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-17.jpg">
+                                        <div class="gallery-item-detail">
+                                            <div class="row">
+                                                <div class="col-sm-7 hidden-xs">
+                                                    <h4 class="gallery-item-heading">داغ داغ</h4>
+                                                    فلفل هندی ، سس سالسا
+                                                </div>
+                                                <div class="col-sm-5 text-right">
+                                                    <a href="~/assets/images/gallery/photo_2017-12-08_23-12-17.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
+                                                    <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- .gallery-item -->
+                                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item dark-cover filter-pizza filter-sandwiches filter-hamburgers">
+                                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-15.jpg">
+                                        <div class="gallery-item-detail">
+                                            <div class="text-center">
+                                                <p>
+                                                    <a href="~/assets/images/gallery/photo_2017-12-08_23-12-15.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
+                                                    <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
+                                                </p>
+                                                <h4 class="gallery-item-heading">داغ داغ</h4>
+                                                فلفل هندی ، سس سالسا
+                                            </div>
+                                        </div>
+                                    </div><!-- .gallery-item -->
+                                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item filter-sandwiches filter-photoshop">
+                                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-12.jpg">
+                                        <div class="gallery-item-detail">
+                                            <div class="text-right">
+                                                <a href="~/assets/images/gallery/photo_2017-12-08_23-12-12.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
+                                                <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
+                                            </div>
+                                        </div>
+                                    </div><!-- .gallery-item -->
+                                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item dark-cover filter-pizza filter-photoshop">
+                                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-37.jpg">
+                                        <div class="gallery-item-detail">
+                                            <div class="text-center">
+                                                <p>
+                                                    <a href="~/assets/images/gallery/photo_2017-12-08_23-12-37.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
+                                                    <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
+                                                </p>
+                                                <h4 class="gallery-item-heading">داغ داغ</h4>
+                                                فلفل هندی ، سس سالسا
+                                            </div>
+                                        </div>
+                                    </div><!-- .gallery-item -->
+                                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item filter-hamburgers filter-wordpress">
+                                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-23.jpg">
+                                        <div class="gallery-item-detail">
+                                            <div class="text-right">
+                                                <a href="~/assets/images/gallery/photo_2017-12-08_23-12-23.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
+                                                <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
+                                            </div>
+                                        </div>
+                                    </div><!-- .gallery-item -->
+                                </div><!-- .gallery -->
+                            </div>
+                        </div><!-- .container -->
+                    </section><!-- #section-gallery -->
+
+                    <div class="section-delimiter"></div>
+
+                    <section id="section-specials">
+                        <div class="container">
+                            <h1 class="bottom-line">ویژه</h1>
+                            <p class="text-center"><em></em></p>
+
+                            <ul class="list-tabs onscroll-animate" data-animation="fadeInDown" data-delay="300">
+                                <li><a href="#">Cheese Pizzas</a></li>
+                                <li><a href="#">Meat Lovers</a></li>
+                                <li><a href="#">Cheese Pizza</a></li>
+                                <li><a href="#">Vegeterian</a></li>
+                            </ul>
+                            <div class="onscroll-animate" data-animation="fadeInUp">
+                                <div id="slider-specials" class="flexslider">
+                                    <ul class="slides">
+                                        <li>
+                                            <a href="#section-menu" class="scroll-to">
+                                                <article class="offer-alt">
+                                                    <img alt="product" src="~/assets/images/slider2/1_big.jpg">
+                                                    <div class="offer-detail">
+                                                        <h4 class="offer-heading">Chicken Primo</h4>
+                                                        <em>Marinated chicken, artichoke hearts, red onions, imported peppers, mozzarella, ricotta and olive oil.</em>
+                                                        <div class="price-huge clearfix">
+                                                            <div class="pull-left">
+                                                                <span class="price-currency">تومان</span><span class="price-val-1">7</span>
+                                                            </div>
+                                                            <div class="pull-left">
+                                                                <span class="price-val-2">99</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="offer-price-small">
+                                                        تومان<span class="offer-price-val1">7</span><span class="offer-price-val2">99</span>
+                                                    </div>
+                                                </article>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#section-menu" class="scroll-to">
+                                                <article class="offer-alt">
+                                                    <img alt="product" src="~/assets/images/slider2/1_big.jpg">
+                                                    <div class="offer-detail">
+                                                        <h4 class="offer-heading">Chicken Primo</h4>
+                                                        <em>Marinated chicken, artichoke hearts, red onions, imported peppers, mozzarella, ricotta and olive oil.</em>
+                                                        <div class="price-huge clearfix">
+                                                            <div class="pull-left">
+                                                                <span class="price-currency">تومان</span><span class="price-val-1">7</span>
+                                                            </div>
+                                                            <div class="pull-left">
+                                                                <span class="price-val-2">99</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="offer-price-small">
+                                                        تومان<span class="offer-price-val1">7</span><span class="offer-price-val2">99</span>
+                                                    </div>
+                                                </article>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#section-menu" class="scroll-to">
+                                                <article class="offer-alt">
+                                                    <img alt="product" src="~/assets/images/slider2/1_big.jpg">
+                                                    <div class="offer-detail">
+                                                        <h4 class="offer-heading">Chicken Primo</h4>
+                                                        <em>Marinated chicken, artichoke hearts, red onions, imported peppers, mozzarella, ricotta and olive oil.</em>
+                                                        <div class="price-huge clearfix">
+                                                            <div class="pull-left">
+                                                                <span class="price-currency">تومان</span><span class="price-val-1">7</span>
+                                                            </div>
+                                                            <div class="pull-left">
+                                                                <span class="price-val-2">99</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="offer-price-small">
+                                                        تومان<span class="offer-price-val1">7</span><span class="offer-price-val2">99</span>
+                                                    </div>
+                                                </article>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#section-menu" class="scroll-to">
+                                                <article class="offer-alt">
+                                                    <img alt="product" src="~/assets/images/slider2/1_big.jpg">
+                                                    <div class="offer-detail">
+                                                        <h4 class="offer-heading">Chicken Primo</h4>
+                                                        <em>Marinated chicken, artichoke hearts, red onions, imported peppers, mozzarella, ricotta and olive oil.</em>
+                                                        <div class="price-huge clearfix">
+                                                            <div class="pull-left">
+                                                                <span class="price-currency">تومان</span><span class="price-val-1">7</span>
+                                                            </div>
+                                                            <div class="pull-left">
+                                                                <span class="price-val-2">99</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="offer-price-small">
+                                                        تومان<span class="offer-price-val1">7</span><span class="offer-price-val2">99</span>
+                                                    </div>
+                                                </article>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#section-menu" class="scroll-to">
+                                                <article class="offer-alt">
+                                                    <img alt="product" src="~/assets/images/slider2/1_big.jpg">
+                                                    <div class="offer-detail">
+                                                        <h4 class="offer-heading">Chicken Primo</h4>
+                                                        <em>Marinated chicken, artichoke hearts, red onions, imported peppers, mozzarella, ricotta and olive oil.</em>
+                                                        <div class="price-huge clearfix">
+                                                            <div class="pull-left">
+                                                                <span class="price-currency">تومان</span><span class="price-val-1">7</span>
+                                                            </div>
+                                                            <div class="pull-left">
+                                                                <span class="price-val-2">99</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="offer-price-small">
+                                                        تومان<span class="offer-price-val1">7</span><span class="offer-price-val2">99</span>
+                                                    </div>
+                                                </article>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div><!-- #slider-specials -->
+                            </div>
+                            <div id="slider-specials-thumbs" class="flexslider flexslider-thumbs">
+                                <ul class="slides">
+                                    <li>
+                                        <img alt="product photo thumbnail" src="~/assets/images/slider2/1_small.jpg">
+                                    </li>
+                                    <li>
+                                        <img alt="product photo thumbnail" src="~/assets/images/slider2/2_small.jpg">
+                                    </li>
+                                    <li>
+                                        <img alt="product photo thumbnail" src="~/assets/images/slider2/3_small.jpg">
+                                    </li>
+                                    <li>
+                                        <img alt="product photo thumbnail" src="~/assets/images/slider2/4_small.jpg">
+                                    </li>
+                                    <li>
+                                        <img alt="product photo thumbnail" src="~/assets/images/slider2/5_small.jpg">
+                                    </li>
+                                </ul>
+                            </div><!-- #slider-specials-thumbs -->
+                        </div><!-- .container -->
+                    </section><!-- #section-specials -->
+                    @*<section class="bg-white bg-pattern">
+                            <div class="margin-50"></div>
+                            <div class="container">
+                                <div class="row centered-columns">
+                                    <div class="col-md-6 centered-column responsive-column onscroll-animate" data-animation="fadeInLeft">
+                                        <img class="img-responsive" alt="mobile" src="~/assets/images/mobile.png">
+                                    </div>
+                                    <div class="col-md-6 centered-column responsive-column onscroll-animate" data-animation="fadeInRight">
+                                        <h1>Now availaible for your smartphones</h1>
+                                        <p>
+                                            It was under very similar circumstances to the first performance; but this time he did not breast out the line; and hence, when the whale started to run, Pip was left behind on the sea, like a hurried traveller's trunk. Alas! Stubb was but too true to his word. It was a beautiful, bounteous, blue day.
+                                        </p>
+                                        <div class="margin-10"></div>
+                                        <a href="#" class="onscroll-animate" data-delay="300"><img class="btn-store" alt="app store" src="~/assets/images/mobile_button1.png"></a>
+                                        <a href="#" class="onscroll-animate" data-delay="400"><img class="btn-store" alt="google play" src="~/assets/images/mobile_button2.png"></a>
+                                        <div class="margin-10"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="margin-50"></div>
+                        </section>*@
+
+                    <section id="section-delivery">
+                        <div class="container">
+                            <h1 class="bottom-line">تحویل</h1>
+                            <p class="text-center"><em></em></p>
+                            <h3 class="text-center text-uppercase">آدرس خود را برای تحویل سفارش خود وارد کنید</h3>
+                            <form class="text-center">
+                                <div class="row onscroll-animate" data-animate="fadeInUp">
+                                    <div class="col-sm-6">
+                                        <input type="text" name="email" placeholder="خیابان">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="room" placeholder="آپارتمان ، اتاق">
+                                    </div>
+                                </div>
+                                <div class="row onscroll-animate" data-animate="fadeInUp">
+                                    <div class="col-sm-6">
+                                        <input type="text" name="city" placeholder="شهر">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <input type="text" name="state" placeholder="استان">
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <div class="margin-20"></div>
+                                                <em>Or</em>
+                                                <div class="margin-20"></div>
+                                            </div>
+                                            <div class="col-xs-5">
+                                                <input type="text" name="zip" placeholder="کد پستی">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="margin-30"></div>
                                 @if (Request.IsAuthenticated)
                                 {
-                                    <a class="button-yellow with-right-arrow form-submit-trigger">Order now</a>}
+                                    <a class="button-yellow button-long with-right-arrow form-submit-trigger onscroll-animate" data-animation="flipInY">ثبت درخواست</a>}
                                 else
                                 {
-                                    <a href="@Url.Action("Index","Account")" class="button-yellow with-right-arrow form-submit-trigger">Order now</a>}
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4">
-                                <div class="product-detail-middle">
-                                    <span class="text-uppercase">select size:</span>
-                                    <label class="product-size">
-                                        <input type="radio" name="product-size" value="small">
-                                        <span class="product-size-img">
-                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
-                                        </span>
-                                        Small: تومان7.99
-                                    </label><!-- .product-size -->
-                                    <label class="product-size">
-                                        <input type="radio" name="product-size" value="medium" checked>
-                                        <span class="product-size-img">
-                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px" height="36px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
-                                        </span>
-                                        Medium: تومان15.99
-                                    </label><!-- .product-size -->
-                                    <label class="product-size">
-                                        <input type="radio" name="product-size" value="medium">
-                                        <span class="product-size-img">
-                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="43.988px" height="44.979px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
-                                        </span>
-                                        Familly: تومان24.99
-                                    </label><!-- .product-size -->
-                                </div><!-- .product-detail-content -->
-                            </div><!-- .col-lg-3 -->
-                        </div><!-- .row -->
-                    </form>
-                    <a class="product-detail-img" href="~/assets/images/products/detail1.jpg" data-lightbox="product-1" style="background-image:url('assets/images/products/detail1.jpg')">
-                        <img alt="product detail" src="~/assets/images/products/detail1.jpg">
-                    </a>
-                </div><!-- #product-1-detail -->
-                <div id="product-2-detail" class="product-detail">
-                    <form>
-                        <input type="hidden" name="product-name" value="product2 name">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-8">
-                                <div class="product-detail-left">
-                                    <h4 class="text-uppercase no-top-margin">Mushroom Lovers</h4>
-                                    <span class="text-uppercase">Ingredients:</span><br>
-                                    <em>Pepperoni, Cascioppo Bros. Italian sausage, Ostrom's mushrooms, olives, green peppers, onions and mozzarella over our seasoned tomato sauce.</em>
-                                    <div class="margin-30"></div>
-                                    <a class="button-yellow with-right-arrow form-submit-trigger">Order now</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4">
-                                <div class="product-detail-middle">
-                                    <span class="text-uppercase">select size:</span>
-                                    <label class="product-size">
-                                        <input type="radio" name="product-size" value="small">
-                                        <span class="product-size-img">
-                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
-                                        </span>
-                                        Small: تومان7.99
-                                    </label><!-- .product-size -->
-                                    <label class="product-size">
-                                        <input type="radio" name="product-size" value="medium" checked>
-                                        <span class="product-size-img">
-                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px" height="36px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
-                                        </span>
-                                        Medium: تومان15.99
-                                    </label><!-- .product-size -->
-                                    <label class="product-size">
-                                        <input type="radio" name="product-size" value="medium">
-                                        <span class="product-size-img">
-                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="43.988px" height="44.979px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
-                                        </span>
-                                        Familly: تومان24.99
-                                    </label><!-- .product-size -->
-                                </div><!-- .product-detail-content -->
-                            </div><!-- .col-lg-3 -->
-                        </div><!-- .row -->
-                    </form>
-                    <a class="product-detail-img" href="~/assets/images/products/detail2.jpg" data-lightbox="product-2" style="background-image:url('assets/images/products/detail2.jpg')">
-                        <img alt="product detail" src="~/assets/images/products/detail2.jpg">
-                    </a>
-                </div><!-- #product-2-detail -->
-                <div id="product-3-detail" class="product-detail">
-                    <form>
-                        <input type="hidden" name="product-name" value="product3 name">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-8">
-                                <div class="product-detail-left">
-                                    <h4 class="text-uppercase no-top-margin">Pepperoni Burner</h4>
-                                    <span class="text-uppercase">Ingredients:</span><br>
-                                    <em>Pepperoni, Cascioppo Bros. Italian sausage, Ostrom's mushrooms, olives, green peppers, onions and mozzarella over our seasoned tomato sauce.</em>
-                                    <div class="margin-30"></div>
-                                    <a class="button-yellow with-right-arrow form-submit-trigger">Order now</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4">
-                                <div class="product-detail-middle">
-                                    <span class="text-uppercase">select size:</span>
-                                    <label class="product-size">
-                                        <input type="radio" name="product-size" value="small">
-                                        <span class="product-size-img">
-                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
-                                        </span>
-                                        Small: تومان7.99
-                                    </label><!-- .product-size -->
-                                    <label class="product-size">
-                                        <input type="radio" name="product-size" value="medium" checked>
-                                        <span class="product-size-img">
-                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px" height="36px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
-                                        </span>
-                                        Medium: تومان15.99
-                                    </label><!-- .product-size -->
-                                    <label class="product-size">
-                                        <input type="radio" name="product-size" value="medium">
-                                        <span class="product-size-img">
-                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="43.988px" height="44.979px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
-                                        </span>
-                                        Familly: تومان24.99
-                                    </label><!-- .product-size -->
-                                </div><!-- .product-detail-content -->
-                            </div><!-- .col-lg-3 -->
-                        </div><!-- .row -->
-                    </form>
-                    <a class="product-detail-img" href="~/assets/images/products/detail3.jpg" data-lightbox="product-3" style="background-image:url('assets/images/products/detail3.jpg')">
-                        <img alt="product detail" src="~/assets/images/products/detail3.jpg">
-                    </a>
-                </div><!-- #product-3-detail -->
-            </div><!-- .product-details -->
-
-            @*<p class="text-center">
-                <a href="menu_1.html" class="button-void button-long onscroll-animate" data-animation="flipInY">SEE FULL MENU</a>
-            </p>*@
-        </div><!-- .container -->
-    </section><!-- #section-menu -->
-
-    <section class="section-testimonials heavy-borders bg-black-cover2 parallax-background">
-        <div class="container bg-delivery">
-            <div class="margin-50"></div>
-            <div class="row onscroll-animate">
-                <div class="col-md-9 col-md-offset-3">
-                    <div id="testimonial-slider">
-                        <div class="testimonial">
-                            Good design is making something intelligible and memorable. Great design is making something memorable and meaningful.
-                            <div class="testimonial-image">
-                                <img alt="author" src="~/assets/images/avatars/1.png">
-                            </div>
-                            <div class="testimonial-detail">
-                                Dieter Rams | <em>Ceo at doing things</em>
-                            </div>
-                        </div><!-- .testimonial -->
-                        <div class="testimonial">
-                            Good design is making something intelligible and memorable. Great design is making something memorable and meaningful.
-                            <div class="testimonial-image">
-                                <img alt="author" src="~/assets/images/avatars/1.png">
-                            </div>
-                            <div class="testimonial-detail">
-                                Dieter Rams | <em>Ceo at doing things</em>
-                            </div>
-                        </div><!-- .testimonial -->
-                        <div class="testimonial">
-                            Good design is making something intelligible and memorable. Great design is making something memorable and meaningful.
-                            <div class="testimonial-image">
-                                <img alt="author" src="~/assets/images/avatars/1.png">
-                            </div>
-                            <div class="testimonial-detail">
-                                Dieter Rams | <em>Ceo at doing things</em>
-                            </div>
-                        </div><!-- .testimonial -->
-                    </div><!-- #testimonial-slider -->
-                </div><!-- .col-md-9 -->
-            </div><!-- .row -->
-            <div class="margin-100"></div>
-        </div><!-- .container -->
-    </section>
-
-    <section id="section-gallery">
-        <div class="container">
-            <h1 class="bottom-line">گالری</h1>
-            <p class="text-center"><em></em></p>
-            <div class="text-center onscroll-animate" data-animation="fadeInDown" data-delay="300">
-                فیلتر:
-                <ul id="gallery-filter" class="list-filter">
-                    <li><a class="isotope-filter active" data-filter="*">همه</a></li>
-                    <li><a class="isotope-filter" data-filter=".filter-pizza">پیتزا</a></li>
-                    <li><a class="isotope-filter" data-filter=".filter-sandwiches">ساندویچ</a></li>
-                    <li><a class="isotope-filter" data-filter=".filter-hamburgers">همبرگر</a></li>
-                </ul>
-            </div>
-            <div class="onscroll-animate" data-animation="fadeInUp">
-                <div id="gallery" class="gallery row">
-                    <div class="col-md-3 col-sm-6 col-xs-12 grid-sizer"></div><!-- basic size of the grid -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item filter-pizza filter-sandwiches filter-wordpress">
-                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-30.jpg">
-                        <div class="gallery-item-detail">
-                            <div class="text-right">
-                                <a href="~/assets/images/gallery/photo_2017-12-08_23-12-30.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
-                                <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
-                            </div>
-                        </div>
-                    </div><!-- .gallery-item -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item dark-cover filter-sandwiches filter-wordpress">
-                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-17.jpg">
-                        <div class="gallery-item-detail">
-                            <div class="text-center">
-                                <p>
-                                    <a href="~/assets/images/gallery/photo_2017-12-08_23-12-17.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
-                                </p>
-                                <h4 class="gallery-item-heading">داغ داغ</h4>
-                                فلفل هندی ، سس سالسا
-                            </div>
-                        </div>
-                    </div><!-- .gallery-item -->
-                    <div class="col-md-6 col-sm-6 col-xs-12 gallery-item filter-pizza filter-photoshop">
-                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-33.jpg">
-                        <div class="gallery-item-detail">
-                            <div class="row">
-                                <div class="col-sm-7 hidden-xs">
-                                    <h4 class="gallery-item-heading">داغ داغ</h4>
-                                    فلفل هندی ، سس سالسا
-                                </div>
-                                <div class="col-sm-5 text-right">
-                                    <a href="~/assets/images/gallery/photo_2017-12-08_23-12-33.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- .gallery-item -->
-                    <div class="col-md-6 col-sm-6 col-xs-12 gallery-item filter-hamburgers filter-photoshop">
-                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-17.jpg">
-                        <div class="gallery-item-detail">
-                            <div class="row">
-                                <div class="col-sm-7 hidden-xs">
-                                    <h4 class="gallery-item-heading">داغ داغ</h4>
-                                    فلفل هندی ، سس سالسا
-                                </div>
-                                <div class="col-sm-5 text-right">
-                                    <a href="~/assets/images/gallery/photo_2017-12-08_23-12-17.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- .gallery-item -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item dark-cover filter-pizza filter-sandwiches filter-hamburgers">
-                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-15.jpg">
-                        <div class="gallery-item-detail">
-                            <div class="text-center">
-                                <p>
-                                    <a href="~/assets/images/gallery/photo_2017-12-08_23-12-15.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
-                                </p>
-                                <h4 class="gallery-item-heading">داغ داغ</h4>
-                                فلفل هندی ، سس سالسا
-                            </div>
-                        </div>
-                    </div><!-- .gallery-item -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item filter-sandwiches filter-photoshop">
-                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-12.jpg">
-                        <div class="gallery-item-detail">
-                            <div class="text-right">
-                                <a href="~/assets/images/gallery/photo_2017-12-08_23-12-12.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
-                                <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
-                            </div>
-                        </div>
-                    </div><!-- .gallery-item -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item dark-cover filter-pizza filter-photoshop">
-                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-37.jpg">
-                        <div class="gallery-item-detail">
-                            <div class="text-center">
-                                <p>
-                                    <a href="~/assets/images/gallery/photo_2017-12-08_23-12-37.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
-                                </p>
-                                <h4 class="gallery-item-heading">داغ داغ</h4>
-                                فلفل هندی ، سس سالسا
-                            </div>
-                        </div>
-                    </div><!-- .gallery-item -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 gallery-item filter-hamburgers filter-wordpress">
-                        <img alt="photo" src="~/assets/images/gallery/photo_2017-12-08_23-12-23.jpg">
-                        <div class="gallery-item-detail">
-                            <div class="text-right">
-                                <a href="~/assets/images/gallery/photo_2017-12-08_23-12-23.jpg" class="gallery-detail-icon" data-lightbox="gallery-images"><i class="fa fa-search"></i></a>
-                                <a href="#" class="gallery-detail-icon"><i class="fa fa-expand"></i></a>
-                            </div>
-                        </div>
-                    </div><!-- .gallery-item -->
-                </div><!-- .gallery -->
-            </div>
-        </div><!-- .container -->
-    </section><!-- #section-gallery -->
-
-    <div class="section-delimiter"></div>
-
-    <section id="section-specials">
-        <div class="container">
-            <h1 class="bottom-line">ویژه</h1>
-            <p class="text-center"><em></em></p>
-
-            <ul class="list-tabs onscroll-animate" data-animation="fadeInDown" data-delay="300">
-                <li><a href="#">Cheese Pizzas</a></li>
-                <li><a href="#">Meat Lovers</a></li>
-                <li><a href="#">Cheese Pizza</a></li>
-                <li><a href="#">Vegeterian</a></li>
-            </ul>
-            <div class="onscroll-animate" data-animation="fadeInUp">
-                <div id="slider-specials" class="flexslider">
-                    <ul class="slides">
-                        <li>
-                            <a href="#section-menu" class="scroll-to">
-                                <article class="offer-alt">
-                                    <img alt="product" src="~/assets/images/slider2/1_big.jpg">
-                                    <div class="offer-detail">
-                                        <h4 class="offer-heading">Chicken Primo</h4>
-                                        <em>Marinated chicken, artichoke hearts, red onions, imported peppers, mozzarella, ricotta and olive oil.</em>
-                                        <div class="price-huge clearfix">
-                                            <div class="pull-left">
-                                                <span class="price-currency">تومان</span><span class="price-val-1">7</span>
-                                            </div>
-                                            <div class="pull-left">
-                                                <span class="price-val-2">99</span>
-                                            </div>
-                                        </div>
+                                    <a href="@Url.Action("Index","Account")" class="button-yellow button-long with-right-arrow form-submit-trigger onscroll-animate" data-animation="flipInY">MAKE YOUR ORDER</a>}
+                            </form>
+                            <div class="section-delimiter"></div>
+                            <form class="text-center">
+                                <h3 class="text-uppercase">آیا شما حساب کاربری دارید</h3>
+                                <p>سریع وارد شود :)</p>
+                                <div class="row onscroll-animate" data-animate="fadeInUp">
+                                    <div class="col-md-3 col-sm-6 col-md-offset-3">
+                                        <input type="text" placeholder="User name or Email">
                                     </div>
-                                    <div class="offer-price-small">
-                                        تومان<span class="offer-price-val1">7</span><span class="offer-price-val2">99</span>
-                                    </div>
-                                </article>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#section-menu" class="scroll-to">
-                                <article class="offer-alt">
-                                    <img alt="product" src="~/assets/images/slider2/1_big.jpg">
-                                    <div class="offer-detail">
-                                        <h4 class="offer-heading">Chicken Primo</h4>
-                                        <em>Marinated chicken, artichoke hearts, red onions, imported peppers, mozzarella, ricotta and olive oil.</em>
-                                        <div class="price-huge clearfix">
-                                            <div class="pull-left">
-                                                <span class="price-currency">تومان</span><span class="price-val-1">7</span>
-                                            </div>
-                                            <div class="pull-left">
-                                                <span class="price-val-2">99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="offer-price-small">
-                                        تومان<span class="offer-price-val1">7</span><span class="offer-price-val2">99</span>
-                                    </div>
-                                </article>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#section-menu" class="scroll-to">
-                                <article class="offer-alt">
-                                    <img alt="product" src="~/assets/images/slider2/1_big.jpg">
-                                    <div class="offer-detail">
-                                        <h4 class="offer-heading">Chicken Primo</h4>
-                                        <em>Marinated chicken, artichoke hearts, red onions, imported peppers, mozzarella, ricotta and olive oil.</em>
-                                        <div class="price-huge clearfix">
-                                            <div class="pull-left">
-                                                <span class="price-currency">تومان</span><span class="price-val-1">7</span>
-                                            </div>
-                                            <div class="pull-left">
-                                                <span class="price-val-2">99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="offer-price-small">
-                                        تومان<span class="offer-price-val1">7</span><span class="offer-price-val2">99</span>
-                                    </div>
-                                </article>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#section-menu" class="scroll-to">
-                                <article class="offer-alt">
-                                    <img alt="product" src="~/assets/images/slider2/1_big.jpg">
-                                    <div class="offer-detail">
-                                        <h4 class="offer-heading">Chicken Primo</h4>
-                                        <em>Marinated chicken, artichoke hearts, red onions, imported peppers, mozzarella, ricotta and olive oil.</em>
-                                        <div class="price-huge clearfix">
-                                            <div class="pull-left">
-                                                <span class="price-currency">تومان</span><span class="price-val-1">7</span>
-                                            </div>
-                                            <div class="pull-left">
-                                                <span class="price-val-2">99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="offer-price-small">
-                                        تومان<span class="offer-price-val1">7</span><span class="offer-price-val2">99</span>
-                                    </div>
-                                </article>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#section-menu" class="scroll-to">
-                                <article class="offer-alt">
-                                    <img alt="product" src="~/assets/images/slider2/1_big.jpg">
-                                    <div class="offer-detail">
-                                        <h4 class="offer-heading">Chicken Primo</h4>
-                                        <em>Marinated chicken, artichoke hearts, red onions, imported peppers, mozzarella, ricotta and olive oil.</em>
-                                        <div class="price-huge clearfix">
-                                            <div class="pull-left">
-                                                <span class="price-currency">تومان</span><span class="price-val-1">7</span>
-                                            </div>
-                                            <div class="pull-left">
-                                                <span class="price-val-2">99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="offer-price-small">
-                                        تومان<span class="offer-price-val1">7</span><span class="offer-price-val2">99</span>
-                                    </div>
-                                </article>
-                            </a>
-                        </li>
-                    </ul>
-                </div><!-- #slider-specials -->
-            </div>
-            <div id="slider-specials-thumbs" class="flexslider flexslider-thumbs">
-                <ul class="slides">
-                    <li>
-                        <img alt="product photo thumbnail" src="~/assets/images/slider2/1_small.jpg">
-                    </li>
-                    <li>
-                        <img alt="product photo thumbnail" src="~/assets/images/slider2/2_small.jpg">
-                    </li>
-                    <li>
-                        <img alt="product photo thumbnail" src="~/assets/images/slider2/3_small.jpg">
-                    </li>
-                    <li>
-                        <img alt="product photo thumbnail" src="~/assets/images/slider2/4_small.jpg">
-                    </li>
-                    <li>
-                        <img alt="product photo thumbnail" src="~/assets/images/slider2/5_small.jpg">
-                    </li>
-                </ul>
-            </div><!-- #slider-specials-thumbs -->
-        </div><!-- .container -->
-    </section><!-- #section-specials -->
-
-    @*<section class="bg-white bg-pattern">
-        <div class="margin-50"></div>
-        <div class="container">
-            <div class="row centered-columns">
-                <div class="col-md-6 centered-column responsive-column onscroll-animate" data-animation="fadeInLeft">
-                    <img class="img-responsive" alt="mobile" src="~/assets/images/mobile.png">
-                </div>
-                <div class="col-md-6 centered-column responsive-column onscroll-animate" data-animation="fadeInRight">
-                    <h1>Now availaible for your smartphones</h1>
-                    <p>
-                        It was under very similar circumstances to the first performance; but this time he did not breast out the line; and hence, when the whale started to run, Pip was left behind on the sea, like a hurried traveller's trunk. Alas! Stubb was but too true to his word. It was a beautiful, bounteous, blue day.
-                    </p>
-                    <div class="margin-10"></div>
-                    <a href="#" class="onscroll-animate" data-delay="300"><img class="btn-store" alt="app store" src="~/assets/images/mobile_button1.png"></a>
-                    <a href="#" class="onscroll-animate" data-delay="400"><img class="btn-store" alt="google play" src="~/assets/images/mobile_button2.png"></a>
-                    <div class="margin-10"></div>
-                </div>
-            </div>
-        </div>
-        <div class="margin-50"></div>
-    </section>*@
-
-    <section id="section-delivery">
-        <div class="container">
-            <h1 class="bottom-line">تحویل</h1>
-            <p class="text-center"><em></em></p>
-            <h3 class="text-center text-uppercase">آدرس خود را برای تحویل سفارش خود وارد کنید</h3>
-            <form class="text-center">
-                <div class="row onscroll-animate" data-animate="fadeInUp">
-                    <div class="col-sm-6">
-                        <input type="text" name="email" placeholder="خیابان">
-                    </div>
-                    <div class="col-sm-6">
-                        <input type="text" name="room" placeholder="آپارتمان ، اتاق">
-                    </div>
-                </div>
-                <div class="row onscroll-animate" data-animate="fadeInUp">
-                    <div class="col-sm-6">
-                        <input type="text" name="city" placeholder="شهر">
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-xs-5">
-                                <input type="text" name="state" placeholder="استان">
-                            </div>
-                            <div class="col-xs-2">
-                                <div class="margin-20"></div>
-                                <em>Or</em>
-                                <div class="margin-20"></div>
-                            </div>
-                            <div class="col-xs-5">
-                                <input type="text" name="zip" placeholder="کد پستی">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="margin-30"></div>
-                @if (Request.IsAuthenticated)
-                {
-                    <a class="button-yellow button-long with-right-arrow form-submit-trigger onscroll-animate" data-animation="flipInY">ثبت درخواست</a>}
-                else
-                {
-                    <a href="@Url.Action("Index","Account")" class="button-yellow button-long with-right-arrow form-submit-trigger onscroll-animate" data-animation="flipInY">MAKE YOUR ORDER</a>}
-            </form>
-            <div class="section-delimiter"></div>
-            <form class="text-center">
-                <h3 class="text-uppercase">آیا شما حساب کاربری دارید</h3>
-                <p>سریع وارد شود :)</p>
-                <div class="row onscroll-animate" data-animate="fadeInUp">
-                    <div class="col-md-3 col-sm-6 col-md-offset-3">
-                        <input type="text" placeholder="User name or Email">
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <input type="password" placeholder="Password">
-                    </div>
-                </div>
-                <a href="@Url.Action("Index","Account")" class="button-yellow button-long onscroll-animate" data-animation="flipInY" >وارد شوید</a>
-                @*<p class="text-center">
-                    <a href="#"><em>Forgot your Password?</em></a>
-                </p>*@
-            </form>
-            <div class="margin-20"></div>
-
-            @*<h3 class="text-center text-uppercase">Find our store near you</h3>
-            <div class="map-container">
-                <div id="map-canvas">
-                </div>
-            </div>*@
-        </div><!-- .container -->
-    </section><!-- #section-delivery -->
-
-    <section class="heavy-borders section-socials bg-black-cover3 parallax-background">
-        <div class="margin-50"></div>
-        <div class="container">
-            <p class="text-high">
-                ما را دنبال کنید 
-            </p>
-            <div class="row text-center">
-                <div class="col-sm-4">
-                    <a href="#" class="onscroll-animate" data-animation="fadeInUp">
-                        <article class="social-big">
-                            <div class="social-icon">
-                                <i class="fa fa-facebook"></i>
-                            </div>
-                            Facebook<br>
-                            <span class="social-detail">Connect with us</span>
-                        </article>
-                    </a>
-                </div>
-                <div class="col-sm-4">
-                    <a href="#" class="onscroll-animate" data-animation="fadeInUp" data-delay="250">
-                        <article class="social-big">
-                            <div class="social-icon">
-                                <i class="fa fa-twitter"></i>
-                            </div>
-                            Twitter<br>
-                            <span class="social-detail">Connect with us</span>
-                        </article>
-                    </a>
-                </div>
-                <div class="col-sm-4">
-                    <a href="#" class="onscroll-animate" data-animation="fadeInUp" data-delay="300">
-                        <article class="social-big">
-                            <div class="social-icon">
-                                <i class="fa fa-google-plus"></i>
-                            </div>
-                            Google+<br>
-                            <span class="social-detail">Connect with us</span>
-                        </article>
-                    </a>
-                </div>
-            </div><!-- .row -->
-        </div><!-- .container -->
-        <div class="margin-60"></div>
-    </section>
-
-    <div class="section-delimiter"></div>
-
-    <section id="section-contact">
-        <div class="container">
-            <h1 class="bottom-line">نظر شما</h1>
-            <p class="text-center" dir="rtl"><em>نظرتان را برای بهبود سایت ما بفرستید.</em></p>
-            <div class="margin-40"></div>
-            <div class="row">
-                <div class="col-md-7 responsive-column onscroll-animate" data-animation="fadeInUp">
-                    <a href="~/assets/images/store/r.3.jpg" data-lightbox="store-images">
-                        <img class="img-full" alt="store photo" src="~/assets/images/store/r.3.jpg">
-                    </a>
-                    <div class="margin-30"></div>
-                    <div class="row">
-                        <div class="col-xs-7">
-                            <a href="~/assets/images/store/r.1.jpg" data-lightbox="store-images">
-                                <img class="img-full" alt="store photo" src="~/assets/images/store/r.1.jpg">
-                            </a>
-                        </div>
-                        <div class="col-xs-5">
-                            <a href="~/assets/images/store/r.2.jpg" data-lightbox="store-images">
-                                <img class="img-full" alt="store photo" src="~/assets/images/store/r.2.jpg">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5 responsive-column onscroll-animate" data-animation="fadeInUp" data-delay="350" dir="rtl">
-                    <h2 class="no-top-margin">ارسال نظرتان</h2>
-                    <form id="form-contact" class="form-big" action="~/assets/php/send_email.php" method="post" data-email-not-set-msg="Email is required" data-message-not-set-msg="Message is required" data-name-not-set-msg="Name is required" data-ajax-fail-msg="Request could not be sent, try later" data-success-msg="Email successfully sent.">
-                        <input type="text" class="text text-right" name="name" placeholder="نام">
-                        <input type="text" class="text text-right" name="email" placeholder="ایمیل">
-                        <input type="text" class="text text-right" name="subject" placeholder="موضوع">
-                        <textarea name="message" placeholder="پیغام"></textarea>
-                        <div class="return-msg"></div>
-                        <div class="text-right">
-                            <input class="button-yellow button-text-low button-long button-low" type="submit" value="ارسال">
-                        </div>
-                    </form>
-                </div>
-            </div><!-- .row -->
-        </div><!-- .container -->
-    </section>
-
-    <section id="cart">
-        <div class="container">
-            <div class="cart-content">
-                <div class="cart-close cart-trigger"><i class="fa fa-close"></i></div>
-                <div class="border-lines-container">
-                    <h1 class="no-top-margin border-lines">سبد خرید</h1>
-                </div>
-                <form>
-                    <div class="product-preview-small">
-                        <div class="product-img">
-                            <img alt="product photo" src="~/assets/images/products/1_small.png" height="83" width="76">
-                        </div>
-                        <div class="product-content">
-                            <div class="row">
-                                <div class="col-md-4 product-price">
-                                    تومان75.0
-                                </div>
-                                <div class="col-md-8" style="float: right;direction: rtl;">
-                                    <h4 class="product-title">پیتزا سبزیجات</h4>
-                                    <div class="text text-right" style="margin: 20px;">
-                                        450 تومان
-                                        <div class="product-pieces">
-                                            <input type="text" value="12">
-                                            <div class="product-pieces-up"></div>
-                                            <div class="product-pieces-down"></div>
-                                        </div>
-                                    </div>
-                                    
-                                
-                                </div>
-
-                            </div>
-                        </div><!-- .product-content -->
-                    </div><!-- .product-preview-small -->
-                    <div class="product-preview-small">
-                        <div class="product-img">
-                            <img alt="product photo" src="~/assets/images/products/1_small.png">
-                        </div>
-                        <div class="product-content">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <h4 class="product-title">Vegetarian Pizza</h4>
-                                    Price تومان4.50, order
-                                    <div class="product-pieces">
-                                        <input type="text" value="3">
-                                        <div class="product-pieces-up"></div>
-                                        <div class="product-pieces-down"></div>
-                                    </div>
-                                    pieces
-                                </div>
-                                <div class="col-md-4 product-price">
-                                    تومان18.0
-                                </div>
-                            </div>
-                        </div><!-- .product-content -->
-                    </div><!-- .product-preview-small -->
-                    <div class="product-preview-small">
-                        <div class="product-img">
-                            <img alt="product photo" src="~/assets/images/products/1_small.png">
-                        </div>
-                        <div class="product-content">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <h4 class="product-title">Vegetarian Pizza</h4>
-                                    Price تومان9.00, order
-                                    <div class="product-pieces">
-                                        <input type="text" value="1">
-                                        <div class="product-pieces-up"></div>
-                                        <div class="product-pieces-down"></div>
-                                    </div>
-                                    pieces
-                                </div>
-                                <div class="col-md-4 product-price">
-                                    تومان31.0
-                                </div>
-                            </div>
-                        </div><!-- .product-content -->
-                    </div><!-- .product-preview-small -->
-                    <div class="product-preview-small">
-                        <div class="product-img">
-                            <i class="fa fa-truck"></i>
-                        </div>
-                        <div class="product-content">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <h4 class="product-title">تحویل</h4>
-                                    Price تومان2.50, order
-                                    <div class="product-pieces product-pieces-readonly">
-                                        <input type="text" value="1" readonly>
-                                        <div class="product-pieces-up"></div>
-                                        <div class="product-pieces-down"></div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <input type="password" placeholder="Password">
                                     </div>
                                 </div>
-                                <div class="col-md-4 product-price">
-                                    تومان2.5
-                                </div>
-                            </div>
-                        </div><!-- .product-content -->
-                    </div><!-- .product-preview-small -->
-                    <hr>
-                    <p class="text-right text-bigger">Total: تومان125.0</p>
-                    <div class="row text-xs-center">
-                        <div class="col-sm-6">
-                            <input class="button-yellow button-text-low button-long button-low" type="submit" value="Update cart">
-                        </div>
-                        <div class="col-sm-6 text-right text-xs-center">
-                            <div class="margin-15"></div>
-                            <a href="#section-delivery" class="button-yellow button-text-low button-long button-low scroll-to cart-trigger">تحویل</a>
-                        </div>
-                    </div>
-                </form>
-            </div><!-- .cart-content -->
-        </div><!-- .container -->
-    </section><!-- #cart -->
-
-    <footer class="page-footer" dir="rtl" >
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 responsive-column">
-                    <h2 class="footer-heading text-uppercase">ما را دنبال کنید</h2>
-                    <div class="margin-10"></div>
-                    
-                    <form id="form-newsletter" class="form-subscribe" action="~/assets/php/save_rss.php" method="post" data-email-not-set-msg="Email must be set." data-success-msg="Email added.">
-                        <input type="email" name="email" placeholder="ایمیل شما">
-                        <div class="return-msg"></div>
-                        <div class="text-right">
-                            <input class="button-yellow button-heavy onscroll-animate" data-animation="flipInY" type="submit" value="ارسال">
-                        </div>
-                    </form>
-                </div><!-- .col-md-4 -->
-                
-                <div class="col-md-4 text-center responsive-column">
-                    <div class="margin-40 visible-lg visible-md"></div>
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="141px" height="141px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
-                    <p class="logo-footer-text">رستوران آنلاین</p>
-                    <p class="logo-footer-detail">تحویل انواع پیتزا و ساندویچ</p>
-                    <a href="#section-menu" class="scroll-to button-yellow button-heavy onscroll-animate" data-animation="flipInY" dir="rtl">همین حالا سفارش دهید!</a>
-                </div><!-- .col-md-4 -->
-                <div class="col-md-4 responsive-column">
-                    <h2 class="footer-heading">ساعات باز</h2>
-                    <div class="opening-hours-wrapper onscroll-animate">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <em>شنبه - پنجشنبه</em>
-                            </div>
-                            <div class="col-xs-6 text-right">
-                                <em>09:00 - 23:00h</em>
-                            </div>
-                        </div>
-                        <div class="margin-5"></div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <em>دوشنبه</em>
-                            </div>
-                            <div class="col-xs-6 text-right">
-                                <em>09:00 - 16:00h</em>
-                            </div>
-                        </div>
-                        <div class="margin-5"></div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <em>جمعه</em>
-                            </div>
-                            <div class="col-xs-6 text-right">
-                                <em>12:00 - 18:00h</em>
-                            </div>
-                        </div>
-                    </div>
-                    <h2 class="footer-heading">آدرس</h2>
-                    <div class="onscroll-animate" data-delay="300" dir="rtl">
-                        <address>
-                            تهران<br>
-                            دانشگاه<br>
-                            کلاس 2104
+                                <a href="@Url.Action("Index","Account")" class="button-yellow button-long onscroll-animate" data-animation="flipInY">وارد شوید</a>
+                                @*<p class="text-center">
+                                        <a href="#"><em>Forgot your Password?</em></a>
+                                    </p>*@
+                            </form>
                             <div class="margin-20"></div>
-                            رزرو: +98 9898 9898 98 <br>
-                            ایمیل: info@yourdomain.com
-                        </address>
-                    </div>
-                </div><!-- .col-md-4 -->
-            </div><!-- .row -->
-        </div><!-- .container -->
-        <div class="site-info">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-8">
-                        Zahra Zolfian
-                    </div>
-                    <div class="col-xs-4 text-right footer-socials">
-                        Spread the Word:
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-vimeo-square"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div><!-- .container -->
-            <div id="scroll-top"><i class="fa fa-angle-double-up"></i></div>
-        </div><!-- .site-info -->
-    </footer>
 
-    @*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>*@
-    <script type="text/javascript" src="~/assets/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="~/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="~/assets/owl-carousel2/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="~/assets/retina/retina.min.js"></script>
-    <script type="text/javascript" src="~/assets/lightbox/js/lightbox.min.js"></script>
-    <script type="text/javascript" src="~/assets/flexslider/jquery.flexslider-min.js"></script>
-    <script type="text/javascript" src="~/assets/js/jquery.inview.min.js"></script>
-    <script type="text/javascript" src="~/assets/js/jquery.stellar.min.js"></script>
-    <script type="text/javascript" src="~/assets/js/isotope.pkgd.min.js"></script>
-    <script type="text/javascript" src="~/assets/js/jquery.scrollTo.min.js"></script>
-    <script type="text/javascript" src="~/assets/js/jquery.nav.min.js"></script>
-    <script type="text/javascript" src="~/assets/js/custom.js"></script>
-</body>
-</html>
+                            @*<h3 class="text-center text-uppercase">Find our store near you</h3>
+                                <div class="map-container">
+                                    <div id="map-canvas">
+                                    </div>
+                                </div>*@
+                        </div><!-- .container -->
+                    </section><!-- #section-delivery -->
+
+                    <section class="heavy-borders section-socials bg-black-cover3 parallax-background">
+                        <div class="margin-50"></div>
+                        <div class="container">
+                            <p class="text-high">
+                                ما را دنبال کنید
+                            </p>
+                            <div class="row text-center">
+                                <div class="col-sm-4">
+                                    <a href="#" class="onscroll-animate" data-animation="fadeInUp">
+                                        <article class="social-big">
+                                            <div class="social-icon">
+                                                <i class="fa fa-facebook"></i>
+                                            </div>
+                                            Facebook<br>
+                                            <span class="social-detail">Connect with us</span>
+                                        </article>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="#" class="onscroll-animate" data-animation="fadeInUp" data-delay="250">
+                                        <article class="social-big">
+                                            <div class="social-icon">
+                                                <i class="fa fa-twitter"></i>
+                                            </div>
+                                            Twitter<br>
+                                            <span class="social-detail">Connect with us</span>
+                                        </article>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="#" class="onscroll-animate" data-animation="fadeInUp" data-delay="300">
+                                        <article class="social-big">
+                                            <div class="social-icon">
+                                                <i class="fa fa-google-plus"></i>
+                                            </div>
+                                            Google+<br>
+                                            <span class="social-detail">Connect with us</span>
+                                        </article>
+                                    </a>
+                                </div>
+                            </div><!-- .row -->
+                        </div><!-- .container -->
+                        <div class="margin-60"></div>
+                    </section>
+
+                    <div class="section-delimiter"></div>
+
+                    <section id="section-contact">
+                        <div class="container">
+                            <h1 class="bottom-line">نظر شما</h1>
+                            <p class="text-center" dir="rtl"><em>نظرتان را برای بهبود سایت ما بفرستید.</em></p>
+                            <div class="margin-40"></div>
+                            <div class="row">
+                                <div class="col-md-7 responsive-column onscroll-animate" data-animation="fadeInUp">
+                                    <a href="~/assets/images/store/r.3.jpg" data-lightbox="store-images">
+                                        <img class="img-full" alt="store photo" src="~/assets/images/store/r.3.jpg">
+                                    </a>
+                                    <div class="margin-30"></div>
+                                    <div class="row">
+                                        <div class="col-xs-7">
+                                            <a href="~/assets/images/store/r.1.jpg" data-lightbox="store-images">
+                                                <img class="img-full" alt="store photo" src="~/assets/images/store/r.1.jpg">
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <a href="~/assets/images/store/r.2.jpg" data-lightbox="store-images">
+                                                <img class="img-full" alt="store photo" src="~/assets/images/store/r.2.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 responsive-column onscroll-animate" data-animation="fadeInUp" data-delay="350" dir="rtl">
+                                    <h2 class="no-top-margin">ارسال نظرتان</h2>
+                                    <form id="form-contact" class="form-big" action="~/assets/php/send_email.php" method="post" data-email-not-set-msg="Email is required" data-message-not-set-msg="Message is required" data-name-not-set-msg="Name is required" data-ajax-fail-msg="Request could not be sent, try later" data-success-msg="Email successfully sent.">
+                                        <input type="text" class="text text-right" name="name" placeholder="نام">
+                                        <input type="text" class="text text-right" name="email" placeholder="ایمیل">
+                                        <input type="text" class="text text-right" name="subject" placeholder="موضوع">
+                                        <textarea name="message" placeholder="پیغام"></textarea>
+                                        <div class="return-msg"></div>
+                                        <div class="text-right">
+                                            <input class="button-yellow button-text-low button-long button-low" type="submit" value="ارسال">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div><!-- .row -->
+                        </div><!-- .container -->
+                    </section>
+
+                    <section id="cart">
+                        <div class="container">
+                            <div class="cart-content">
+                                <div class="cart-close cart-trigger"><i class="fa fa-close"></i></div>
+                                <div class="border-lines-container">
+                                    <h1 class="no-top-margin border-lines">سبد خرید</h1>
+                                </div>
+                                <form>
+                                    @using (Html.BeginForm("Index", "Home"))
+                                    {
+                                        foreach (var cart in Model.CartItems)
+                                        {
+                                            <div class="product-preview-small">
+                                                <a href="javascript:void(0)" class="btn btn-effect-ripple btn-xs btn-danger pull-right" onclick="remove($(this))" id="remove" name="@cart.Product.Name"><i class="fa fa-times"></i></a>
+                                                
+                                                <div class="product-img">
+                                                    <img alt="@cart.Product.Name" src="@Url.Content(cart.Product.ImageUrl)" height="83" width="76">
+                                                </div>
+                                                <div class="product-content">
+                                                    <div class="row" style="float: right; direction: rtl;">
+                                                        <div class="col-md-4 product-price">
+                                                            @{
+                                                                var subTotal = 0m;
+                                                                subTotal = cart.Product.Price * cart.Count;
+                                                            }
+                                                            @subTotal تومان
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <h4 class="product-title">@cart.Product.Name, </h4>
+                                                            <h5 class="product-title">@cart.Product.Category.Name</h5>
+                                                            <div class="text text-right" style="margin: 20px;">
+                                                                فی: @cart.Product.Price تومان
+                                                                <div class="product-pieces">
+                                                                    <input type="text" value="@cart.Count" readonly="">
+                                                                    @*<div class="product-pieces-up"></div>
+                                                                    <div class="product-pieces-down"></div>*@
+                                                                </div>
+                                                            </div>
+
+
+
+                                                        </div>
+
+                                                    </div>
+                                                </div><!-- .product-content -->
+                                            </div><!-- .product-preview-small -->
+                                        }
+
+                                        <hr>
+                                       
+                                        var total = 0m;
+                                        foreach (var item in Model.CartItems)
+                                        {
+                                            total += (item.Product.Price * item.Count);
+                                        }
+                                        <p class="text-right text-bigger" dir="rtl">کل: @total تومان</p>
+                                            
+
+                                        <div class="row text-xs-center">
+                                            <div class="col-sm-6">
+                                                @*<input class="button-yellow button-text-low button-long button-low" type="submit" value="Update cart">*@
+                                                <a href="#section-menu" class="button-yellow button-text-low button-long button-low scroll-to cart-trigger">بروز رسانی سبد خرید</a>
+                                            </div>
+                                            <div class="col-sm-6 text-right text-xs-center">
+                                                <div class="margin-15"></div>
+                                                <a href="#section-delivery" class="button-yellow button-text-low button-long button-low scroll-to cart-trigger">تحویل</a>
+                                            </div>
+                                        </div>
+                                        
+                                    }
+                                    
+                                </form>
+                            </div><!-- .cart-content -->
+                        </div><!-- .container -->
+                    </section><!-- #cart -->
+
+                    <footer class="page-footer" dir="rtl">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 responsive-column">
+                                    <h2 class="footer-heading text-uppercase">ما را دنبال کنید</h2>
+                                    <div class="margin-10"></div>
+
+                                    <form id="form-newsletter" class="form-subscribe" action="~/assets/php/save_rss.php" method="post" data-email-not-set-msg="Email must be set." data-success-msg="Email added.">
+                                        <input type="email" name="email" placeholder="ایمیل شما">
+                                        <div class="return-msg"></div>
+                                        <div class="text-right">
+                                            <input class="button-yellow button-heavy onscroll-animate" data-animation="flipInY" type="submit" value="ارسال">
+                                        </div>
+                                    </form>
+                                </div><!-- .col-md-4 -->
+
+                                <div class="col-md-4 text-center responsive-column">
+                                    <div class="margin-40 visible-lg visible-md"></div>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="141px" height="141px" viewBox="0 0 43.988 44.979" style="enable-background:new 0 0 43.988 44.979;" xml:space="preserve"> <path d="M37.383,16.22c3.517,7.474,0.886,16.918-5.946,21.733c-7.082,4.99-16.782,4.166-22.674-2.191 C2.7,29.22,1.912,20.428,7.131,12.854c4.695-6.813,14.018-8.953,20.577-5.988c-2.064,5.407-4.132,10.822-6.29,16.472 C26.876,20.904,32.102,18.574,37.383,16.22z M27.102,32.566c-0.002,1.413,1.051,2.507,2.422,2.515c1.354,0.008,2.424-1.1,2.426-2.51 c0.001-1.398-1.09-2.474-2.486-2.451C28.108,30.142,27.104,31.182,27.102,32.566z M13.273,14.833 c1.334,0.053,2.513-1.055,2.563-2.41c0.049-1.329-0.975-2.437-2.32-2.508c-1.404-0.074-2.527,0.919-2.622,2.318 C10.806,13.537,11.944,14.782,13.273,14.833z M23.347,32.031c1.395,0.009,2.481-1.067,2.467-2.445 c-0.013-1.351-1.053-2.4-2.39-2.414c-1.423-0.014-2.533,1.021-2.547,2.376C20.862,30.881,21.998,32.021,23.347,32.031z M30.313,21.663c-1.356-0.015-2.454,1.013-2.502,2.341c-0.049,1.342,1.101,2.552,2.429,2.556c1.368,0.004,2.497-1.121,2.496-2.489 C32.733,22.728,31.675,21.675,30.313,21.663z M9.766,33.943c0.002,1.377,1.02,2.435,2.363,2.459 c1.361,0.024,2.454-1.094,2.446-2.504c-0.007-1.361-1.066-2.449-2.384-2.447C10.758,31.453,9.763,32.476,9.766,33.943z M19.055,15.114c-1.412,0.003-2.447,1.067-2.431,2.496c0.016,1.351,1.068,2.375,2.445,2.379c1.387,0.003,2.446-1.089,2.429-2.508 C21.483,16.141,20.42,15.111,19.055,15.114z M8.195,24.771c1.288-0.005,2.425-1.131,2.445-2.422 c0.021-1.376-1.106-2.513-2.473-2.496c-1.368,0.02-2.482,1.168-2.449,2.528C5.75,23.689,6.878,24.777,8.195,24.771z M36.12,25.425 c0.969-0.006,1.674-0.747,1.662-1.75c-0.012-1.015-0.707-1.722-1.695-1.726c-0.987-0.003-1.801,0.831-1.768,1.811 C34.349,24.687,35.152,25.43,36.12,25.425z M27.534,36.958C27.505,36,26.739,35.29,25.76,35.312 c-1.018,0.023-1.698,0.724-1.678,1.728c0.02,0.961,0.814,1.732,1.752,1.698C26.778,38.705,27.563,37.882,27.534,36.958z M24.091,9.541c-0.013-0.973-0.744-1.688-1.723-1.684c-0.974,0.002-1.732,0.737-1.742,1.687c-0.01,0.948,0.866,1.827,1.795,1.803 C23.299,11.324,24.103,10.455,24.091,9.541z M15.21,23.873c-1.039-0.006-1.715,0.628-1.742,1.635 c-0.025,0.948,0.723,1.752,1.658,1.783c0.994,0.034,1.793-0.75,1.79-1.754C16.912,24.52,16.255,23.879,15.21,23.873z" /> <path d="M22.16,1.466c1.467,0.295,3.473,0.697,5.477,1.108c0.209,0.043,0.497,0.082,0.593,0.226 c0.267,0.406,0.452,0.866,0.669,1.304c-0.451,0.157-0.929,0.506-1.347,0.443c-1.881-0.286-3.741-0.972-5.615-0.996 C12.395,3.431,4.645,9.65,2.424,19.024c-2.571,10.852,4.697,21.734,15.863,23.752c9.054,1.636,18.534-4.085,21.474-12.866 c1.479-4.418,1.771-8.772-0.082-13.141c-0.246-0.579-0.361-1.177,0.35-1.49c0.806-0.356,1.169,0.167,1.46,0.84 c2.14,4.953,1.83,9.934-0.073,14.818c-3.299,8.468-9.694,13.109-18.49,13.957c-8.449,0.813-17.889-4.136-21.653-14.25 C-3.021,19.104,3.8,4.498,17.908,1.942C19.11,1.725,20.341,1.666,22.16,1.466z" /> <path d="M30.661,3.691c4.499,1.791,7.608,4.887,9.654,9.36c-5.255,2.337-10.445,4.645-15.953,7.094 C26.526,14.492,28.581,9.125,30.661,3.691z M35.381,8.472c-1.44,0-2.42,0.945-2.445,2.354c-0.026,1.438,1.008,2.531,2.404,2.542 c1.391,0.01,2.449-1.071,2.445-2.497C37.78,9.481,36.768,8.47,35.381,8.472z M27.57,14.899c0.003,0.958,0.754,1.729,1.691,1.733 c0.881,0.005,1.748-0.85,1.761-1.738c0.014-0.983-0.813-1.788-1.813-1.765C28.227,13.152,27.567,13.864,27.57,14.899z" /> <path d="M43.988,11.932c-0.199,0.224-0.42,0.69-0.679,0.712c-0.383,0.031-0.966-0.134-1.158-0.423 c-0.6-0.904-0.998-1.941-1.578-2.861c-2.061-3.264-4.907-5.607-8.402-7.16c-0.165-0.073-0.334-0.138-0.505-0.194 c-0.676-0.229-1.091-0.663-0.821-1.402c0.303-0.827,1.004-0.646,1.55-0.373c1.484,0.743,3.017,1.438,4.372,2.382 c3.066,2.137,5.333,5.001,6.895,8.425C43.767,11.267,43.836,11.511,43.988,11.932z" /> </svg>
+                                    <p class="logo-footer-text">رستوران آنلاین</p>
+                                    <p class="logo-footer-detail">تحویل انواع پیتزا و ساندویچ</p>
+                                    <a href="#section-menu" class="scroll-to button-yellow button-heavy onscroll-animate" data-animation="flipInY" dir="rtl">همین حالا سفارش دهید!</a>
+                                </div><!-- .col-md-4 -->
+                                <div class="col-md-4 responsive-column">
+                                    <h2 class="footer-heading">ساعات باز</h2>
+                                    <div class="opening-hours-wrapper onscroll-animate">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <em>شنبه - پنجشنبه</em>
+                                            </div>
+                                            <div class="col-xs-6 text-right">
+                                                <em>09:00 - 23:00h</em>
+                                            </div>
+                                        </div>
+                                        <div class="margin-5"></div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <em>دوشنبه</em>
+                                            </div>
+                                            <div class="col-xs-6 text-right">
+                                                <em>09:00 - 16:00h</em>
+                                            </div>
+                                        </div>
+                                        <div class="margin-5"></div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <em>جمعه</em>
+                                            </div>
+                                            <div class="col-xs-6 text-right">
+                                                <em>12:00 - 18:00h</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2 class="footer-heading">آدرس</h2>
+                                    <div class="onscroll-animate" data-delay="300" dir="rtl">
+                                        <address>
+                                            تهران<br>
+                                            دانشگاه<br>
+                                            کلاس 2104
+                                            <div class="margin-20"></div>
+                                            رزرو: +98 9898 9898 98 <br>
+                                            ایمیل: info@yourdomain.com
+                                        </address>
+                                    </div>
+                                </div><!-- .col-md-4 -->
+                            </div><!-- .row -->
+                        </div><!-- .container -->
+                        <div class="site-info">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        Zahra Zolfian
+                                    </div>
+                                    <div class="col-xs-4 text-right footer-socials">
+                                        Spread the Word:
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-vimeo-square"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    </div>
+                                </div>
+                            </div><!-- .container -->
+                            <div id="scroll-top"><i class="fa fa-angle-double-up"></i></div>
+                        </div><!-- .site-info -->
+                    </footer>
+
+                    @*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>*@
+                    <script type="text/javascript" src="~/assets/js/jquery-1.11.3.min.js"></script>
+                    <script type="text/javascript" src="~/assets/bootstrap/js/bootstrap.min.js"></script>
+                    <script type="text/javascript" src="~/assets/owl-carousel2/owl.carousel.min.js"></script>
+                    <script type="text/javascript" src="~/assets/retina/retina.min.js"></script>
+                    <script type="text/javascript" src="~/assets/lightbox/js/lightbox.min.js"></script>
+                    <script type="text/javascript" src="~/assets/flexslider/jquery.flexslider-min.js"></script>
+                    <script type="text/javascript" src="~/assets/js/jquery.inview.min.js"></script>
+                    <script type="text/javascript" src="~/assets/js/jquery.stellar.min.js"></script>
+                    <script type="text/javascript" src="~/assets/js/isotope.pkgd.min.js"></script>
+                    <script type="text/javascript" src="~/assets/js/jquery.scrollTo.min.js"></script>
+                    <script type="text/javascript" src="~/assets/js/jquery.nav.min.js"></script>
+                    <script type="text/javascript" src="~/assets/js/custom.js"></script>
+
+                    <script type="text/javascript">
+                        function add(tag) {
+                            debugger;
+                            var t = tag.attr("name");
+                            $.ajax({
+                                type: "GET",
+                                url: '/ShoppingCart/AddToCart',
+                                data: { nameProduct: t },
+                                dataType: "json",
+                                success: function (response) {
+                                    debugger;
+                                    $('#invoice').load(window.location.href + " #invoice");
+                                    $('#modal-package').modal('hide');
+
+                                },
+                                error: function (response) {
+                                    debugger;
+                                    alert("failed");
+                                }
+                            });
+                        };
+
+                        function remove(tag) {
+                            debugger;
+                            var t = tag.attr("name");
+                            $.ajax({
+                                type: "GET",
+                                url: '/ShoppingCart/RemoveFromCart',
+                                data: { nameProduct: t },
+                                dataType: "json",
+                                success: function (response) {
+                                    debugger;
+                                    $('#invoice').load(window.location.href + " #invoice");
+                                },
+                                error: function (response) {
+                                    debugger;
+                                    alert("failed");
+                                }
+                            });
+                        };
+                    </script>
+                </body>
+            </html>

@@ -90,7 +90,8 @@ namespace Restaurant.Web.Services
 		public async Task<IEnumerable<CartItem>> GetCartItemsAsync()
 		{
 			return await _context.CartItems.Include("Product")
-				.Where(c => c.CartId == _cartId).ToArrayAsync();
+										   .Where(c => c.CartId == _cartId)
+										   .ToArrayAsync();
 		}
 
 		public async Task<PaymentResult> CheckoutAsync(CheckoutViewModel model)

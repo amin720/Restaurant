@@ -1,0 +1,27 @@
+﻿@model Restaurant.Web.ViewModels.ProductsViewModel
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+}
+
+<h2>Index2</h2>
+<ul>
+@foreach (var item in Model.Categories.Where(cat => cat.ParentId == null).ToList())
+{
+    <li>
+        @item.Name
+        <ul>
+            @foreach (var p in Model.Products.Where(cat => cat.Category.ParentId == item.Id))
+            {
+                <li>
+                    (-) @p.Category.Name
+                </li>
+                <li>
+                    @p.Name
+                </li>
+            }
+           
+        </ul>
+    </li>
+}
+</ul>

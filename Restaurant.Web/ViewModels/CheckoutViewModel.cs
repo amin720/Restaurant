@@ -7,7 +7,7 @@ namespace Restaurant.Web.ViewModels
 	public class CheckoutViewModel
 	{
 		[Required]
-		[Display(Name = "First Name")]
+		[Display(Name = "نام کوچک")]
 		[StringLength(160)]
 		public string FirstName { get; set; }
 

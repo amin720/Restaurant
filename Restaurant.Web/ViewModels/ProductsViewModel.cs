@@ -18,5 +18,7 @@ namespace Restaurant.Web.ViewModels
 		public decimal TotalPrice { get; set; }
 
 		public IEnumerable<Product> Products { get; set; }
+		public IEnumerable<CartItem> CartItems { get; set; }
+		public IEnumerable<Category> Categories { get; set; }
 	}
 }
