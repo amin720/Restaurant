@@ -11,7 +11,7 @@ using Restaurant.Web.ViewModels;
 namespace Restaurant.Web.Controllers
 {
 	[RoutePrefix("")]
-	[Authorize(Roles = "user")]
+	[Authorize(Roles = "user,admin")]
 	public class ShoppingCartController : Controller
 	{
 		private readonly IProductRepository _productRepository;
